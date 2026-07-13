@@ -35,7 +35,7 @@ $result_pegawai = mysqli_query($conn, $query_pegawai);
     <div>
       <div class="hero-badge">Portal Resmi Dinas Pendidikan</div>
       <h2>Selamat Datang Di Dinas Pendidikan Kabupaten Sumenep</h2>
-      <p>Mewujudkan layanan pendidikan yang merata, bermutu, dan berkarakter demi generasi Sumenep yang unggul.</p>
+      <p>Mewujudkan layanan pendidikan yang merata, bermutu, dan berkarakter demi generasi Sumenep yang unggul dan berdaya saing.</p>
     </div>
   </div>
 </section>
