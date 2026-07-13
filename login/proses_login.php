@@ -35,7 +35,7 @@ function checkLogin($data, &$errors)
     }
 
     $_SESSION['user'] = $user;
-    header("Location: ../dashboard/index.php");
+    header("Location: ../index.php");
     exit;
 }
 ?>

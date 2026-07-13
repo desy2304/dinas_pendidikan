@@ -164,7 +164,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="row no-gutters">
                             <div class="col-lg-5 d-none d-lg-flex">
                                 <div class="login-side w-100">
-                                    <img src="../img/Logo1.png" alt="Logo Dinas Pendidikan">
+                                    <img src="../uploads/Logo1.png" alt="Logo Dinas Pendidikan">
                                     <h5>DINAS PENDIDIKAN<br>KABUPATEN SUMENEP</h5>
                                     <p>Sistem Informasi &amp; Kehumasan â€” Panel Admin</p>
                                 </div>
