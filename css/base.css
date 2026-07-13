@@ -1,0 +1,64 @@
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0B1F3A;
+  --navy-mid:#162F55;
+  --navy-light:#1E3F70;
+  --gold:#C89B3C;
+  --gold-light:#E8BF6A;
+  --cream:#F7F4EE;
+  --white:#FFFFFF;
+  --text:#1A1A2E;
+  --muted:#6B7280;
+  --line:#E5E1D8;
+  --reveal-easing:cubic-bezier(.2,.9,.2,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--text);background:var(--white);overflow-x:hidden}
+
+/* ── SECTION BASE (dipakai di semua halaman) ── */
+.section{padding:80px 0}
+.section-inner{max-width:1200px;margin:0 auto;padding:0 32px}
+.section-label{font-size:12px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px}
+.section-title{font-family:'Playfair Display',serif;font-size:36px;font-weight:800;color:var(--navy);line-height:1.2;margin-bottom:14px}
+.section-sub{font-size:15px;color:var(--muted);line-height:1.7;max-width:520px}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;gap:20px;flex-wrap:wrap}
+.section-alt{background:var(--cream)}
+.link-all{font-size:13.5px;font-weight:600;color:var(--navy);text-decoration:none;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.link-all:hover{color:var(--gold)}
+.link-all::after{content:'→';transition:.2s}
+.link-all:hover::after{transform:translateX(4px)}
+
+/* Anchor scroll offset supaya tak tertutup header sticky */
+section[id]{scroll-margin-top:96px}
+
+/* ── LAYANAN CARD (dipakai di Beranda, Profil, dan Layanan) ── */
+.layanan-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.layanan-card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:28px 22px;text-align:center;transition:.25s;cursor:pointer;position:relative;overflow:hidden}
+.layanan-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:.3s}
+.layanan-card:hover::before{transform:scaleX(1)}
+.layanan-card:hover{box-shadow:0 8px 32px rgba(11,31,58,.08);transform:translateY(-2px)}
+.layanan-icon{width:56px;height:56px;border-radius:14px;background:var(--cream);display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.layanan-icon svg{width:28px;height:28px;stroke:var(--navy);fill:none;stroke-width:1.5}
+.layanan-card h4{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px;line-height:1.3}
+.layanan-card p{font-size:12.5px;color:var(--muted);line-height:1.5}
+
+/* ── TOMBOL KEMBALI ── */
+.btn-back{display:inline-flex;align-items:center;gap:6px;color:var(--navy);font-weight:600;font-size:13.5px;text-decoration:none;background:var(--white);border:1px solid var(--line);padding:9px 16px;border-radius:100px;margin-bottom:20px;transition:.2s}
+.btn-back:hover{background:var(--navy);color:#fff;border-color:var(--navy);transform:translateX(-2px)}
+
+/* ── REVEAL ON SCROLL (IntersectionObserver) ── */
+.reveal{opacity:0;transform:translateY(12px);transition:opacity .45s var(--reveal-easing),transform .45s var(--reveal-easing);will-change:opacity,transform}
+.reveal.in-view{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  .reveal{transition:none;transform:none;opacity:1}
+}
+
+@media(max-width:900px){
+  .layanan-grid{grid-template-columns:repeat(2,1fr)}
+  .row{flex-direction:column}
+  .col{width:100%}
+}
+@media(max-width:600px){
+  .section-title{font-size:26px}
+  .layanan-grid{grid-template-columns:1fr}
+}

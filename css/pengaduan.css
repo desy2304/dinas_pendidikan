@@ -1,0 +1,37 @@
+/* ── FORM CEK TIKET (halaman pengaduan.php) ── */
+.tiket-search{display:flex;gap:10px;margin-bottom:24px}
+.tiket-search input{flex:1;padding:14px 18px;border-radius:10px;border:1px solid var(--line);background:var(--white);font-size:14px;font-family:inherit;outline:none}
+.tiket-search input:focus{border-color:var(--gold)}
+.tiket-search button{padding:14px 24px;background:var(--navy);color:#fff;font-weight:700;font-size:14px;border:none;border-radius:10px;cursor:pointer;white-space:nowrap;font-family:inherit}
+.tiket-search button:hover{background:var(--navy-mid)}
+
+/* ── NOTIFIKASI ── */
+.tiket-alert-success{background:#DCFCE7;border:1px solid #86EFAC;color:#166534;padding:16px 20px;border-radius:12px;font-size:14px;line-height:1.6}
+.tiket-alert-error{background:#FEE2E2;border:1px solid #FCA5A5;color:#991B1B;padding:16px 20px;border-radius:12px;font-size:14px;line-height:1.6}
+
+/* ── KARTU DETAIL TIKET ── */
+.tiket-card{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:32px;box-shadow:0 10px 30px rgba(11,31,58,.05)}
+.tiket-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.tiket-no{font-family:monospace;font-size:13px;color:var(--muted);letter-spacing:.5px}
+.tiket-card-head h3{font-size:20px;color:var(--navy);margin-top:6px;line-height:1.35}
+
+.status-badge{display:inline-flex;padding:6px 14px;border-radius:100px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap}
+.status-diajukan{background:#FEF3C7;color:#92400E}
+.status-diproses{background:#DBEAFE;color:#1E40AF}
+.status-ditanggapi{background:#D1FAE5;color:#065F46}
+.status-ditutup{background:#E5E7EB;color:#374151}
+
+.tiket-meta-row{display:flex;gap:20px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+.tiket-meta-row span{display:inline-flex;align-items:center;gap:6px}
+.tiket-isi{font-size:15px;line-height:1.8;color:var(--text);margin-bottom:20px}
+
+.tanggapan-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:12px;text-transform:uppercase;letter-spacing:.4px}
+.tanggapan-item{background:var(--cream);border-radius:12px;padding:16px 18px;margin-bottom:12px}
+.tanggapan-item .tanggapan-date{font-size:12px;color:var(--muted);margin-bottom:6px}
+.tanggapan-item p{font-size:14px;color:var(--text);line-height:1.7;margin:0}
+.tanggapan-kosong{font-size:13px;color:var(--muted);font-style:italic}
+
+@media(max-width:600px){
+  .tiket-search{flex-direction:column}
+  .tiket-card{padding:24px 20px}
+}

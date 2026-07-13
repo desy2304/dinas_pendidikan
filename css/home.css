@@ -1,0 +1,167 @@
+/* =======================
+   VISI MISI
+======================= */
+.visi-misi{
+    background:#fff;
+    padding:80px 0;
+}
+.visi-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+    align-items:stretch;
+    width:100%;
+}
+.visi-misi .section-inner{
+    max-width:1200px;
+    margin:0 auto;
+}
+.profile-summary-card{
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    background:rgba(11,31,58,.85);
+    padding:40px 36px;
+    border-radius:20px;
+    border:1px solid rgba(11,31,58,.06);
+    box-shadow:0 10px 30px rgba(11,31,58,.06);
+    transition:transform .25s ease, box-shadow .25s ease;
+}
+.profile-summary-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 16px 40px rgba(11,31,58,.10);
+}
+.profile-summary-card h3{
+    font-size:22px;
+    font-weight:700;
+    color:#fff;
+    margin:22px 0 14px;
+}
+.profile-summary-card p,
+.profile-summary-card ol,
+.profile-summary-card ul{
+    font-size:15px;
+    line-height:1.75;
+    color:#A8BDD4;
+}
+.profile-summary-card ol,
+.profile-summary-card ul{
+    padding-left:20px;
+    margin:0;
+}
+.profile-summary-card li{
+    margin-bottom:12px;
+    padding-left:4px;
+}
+.profile-summary-card li::marker{
+    font-weight:700;
+    color:var(--gold-light);
+}
+.icon{
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    background:rgba(232,191,106,.15);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:var(--gold-light);
+    font-size:24px;
+    flex-shrink:0;
+}
+.icon i{
+    line-height:1;
+}
+@media(max-width:700px){
+    .visi-grid{grid-template-columns:1fr}
+}
+
+/* ── PENGUMUMAN & BERITA ── */
+.news-layout{display:grid;grid-template-columns:2.2fr 1fr;gap:24px;align-items:stretch}
+.news-featured-card{background:var(--white);border-radius:24px;overflow:hidden;box-shadow:0 24px 60px rgba(11,31,58,.08);transition:.25s;display:grid;grid-template-columns:1fr}
+.news-featured-card:hover{transform:translateY(-2px)}
+.featured-img{height:420px;background:linear-gradient(135deg,var(--navy-mid),var(--navy-light));position:relative;overflow:hidden}
+.news-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(11,31,58,.55),transparent)}
+.news-img-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.15}
+.news-img-icon svg{width:80px;height:80px;fill:white}
+.news-badge{position:absolute;top:20px;left:20px;background:var(--gold);color:var(--navy);font-size:12px;font-weight:700;padding:10px 16px;border-radius:100px;text-transform:uppercase;letter-spacing:.5px}
+.featured-body{padding:36px 36px 42px}
+.featured-body .news-meta{font-size:13px;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.featured-body h3{font-size:36px;font-weight:800;color:var(--navy);line-height:1.1;margin-bottom:22px}
+.featured-body p{font-size:16px;color:var(--text);line-height:1.8;max-width:700px;margin-bottom:26px}
+.read-more{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:var(--gold);text-decoration:none}
+.read-more:hover{gap:12px}
+.news-sidebar{display:flex;flex-direction:column;gap:18px}
+.news-list-card{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:24px;transition:.25s}
+.news-list-card:hover{box-shadow:0 18px 40px rgba(11,31,58,.08);transform:translateY(-2px)}
+.sidebar-badge{position:static;display:inline-flex;margin-bottom:16px}
+.news-list-item h4{font-size:18px;font-weight:700;color:var(--navy);line-height:1.35;margin-bottom:10px}
+.news-list-item span{font-size:13px;color:var(--muted)}
+
+/* ── GALERI (preview di Beranda) ── */
+.galeri-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:200px 200px;gap:14px}
+.galeri-item{border-radius:14px;overflow:hidden;position:relative;cursor:pointer}
+.galeri-item:first-child{grid-row:1/3;grid-column:1/2}
+.galeri-bg{position:absolute;inset:0;transition:.4s}
+.galeri-item:hover .galeri-bg{transform:scale(1.05)}
+.galeri-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(11,31,58,.8) 0%,transparent 60%);opacity:0;transition:.3s;display:flex;align-items:flex-end;padding:18px}
+.galeri-item:hover .galeri-overlay{opacity:1}
+.galeri-overlay span{color:#fff;font-size:13px;font-weight:600}
+.g1{background:linear-gradient(135deg,#1a3a6b,#0e2444)}
+.g2{background:linear-gradient(135deg,#2d5016,#1a3209)}
+.g3{background:linear-gradient(135deg,#5c2a00,#3a1900)}
+.g4{background:linear-gradient(135deg,#1a1a5e,#0d0d3b)}
+.g5{background:linear-gradient(135deg,#4a1a00,#2d1000)}
+.galeri-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.2}
+.galeri-icon svg{width:48px;height:48px;fill:white}
+
+/* ── PEGAWAI (preview di Beranda) ── */
+.pegawai-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.pegawai-card{background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden;text-align:center;transition:.25s}
+.pegawai-card:hover{box-shadow:0 12px 40px rgba(11,31,58,.1);transform:translateY(-3px)}
+.pegawai-avatar{height:160px;background:linear-gradient(135deg,var(--navy-mid),var(--navy-light));position:relative;display:flex;align-items:flex-end;justify-content:center}
+.pegawai-avatar-circle{width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.15);border:3px solid rgba(200,155,60,.4);display:flex;align-items:center;justify-content:center;margin-bottom:-20px;position:relative;z-index:1}
+.pegawai-avatar-circle svg{width:40px;height:40px;fill:rgba(255,255,255,.7)}
+.pegawai-info{padding:28px 18px 20px}
+.pegawai-name{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:5px}
+.pegawai-jabatan{font-size:12px;color:var(--muted)}
+.pegawai-bidang{display:inline-block;margin-top:10px;font-size:11px;font-weight:600;color:var(--gold);background:rgba(200,155,60,.1);padding:3px 10px;border-radius:100px}
+
+/* ── PENGADUAN ── */
+.pengaduan-wrap{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);border-radius:24px;padding:60px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.pengaduan-text .section-label{color:var(--gold-light)}
+.pengaduan-text .section-title{color:#fff;font-size:30px}
+.pengaduan-text p{color:#A8BDD4;font-size:15px;line-height:1.7;margin-top:12px;margin-bottom:24px}
+.tiket-input{display:flex;gap:10px;margin-top:16px}
+.tiket-input input{flex:1;padding:13px 18px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:#fff;font-size:14px;font-family:inherit;outline:none}
+.tiket-input input::placeholder{color:#5a7a9b}
+.tiket-input input:focus{border-color:rgba(200,155,60,.5)}
+.tiket-input button{padding:13px 22px;background:var(--gold);color:var(--navy);font-weight:700;font-size:14px;border:none;border-radius:10px;cursor:pointer;white-space:nowrap;font-family:inherit}
+.pengaduan-form{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:32px}
+.form-title{font-size:16px;font-weight:700;color:#fff;margin-bottom:20px}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:12px;font-weight:600;color:#7A9BBF;margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 16px;border-radius:8px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#fff;font-size:14px;font-family:inherit;outline:none;transition:.2s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:rgba(200,155,60,.4);background:rgba(255,255,255,.08)}
+.form-group select{cursor:pointer}
+.form-group select option{background:var(--navy);color:#fff}
+.form-group textarea{resize:none;height:80px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btn-submit{width:100%;padding:13px;background:var(--gold);color:var(--navy);font-weight:700;font-size:14px;border:none;border-radius:10px;cursor:pointer;font-family:inherit;margin-top:6px}
+.btn-submit:hover{background:var(--gold-light)}
+
+@media(max-width:900px){
+  .news-layout{grid-template-columns:1fr}
+  .news-featured-card{grid-template-columns:1fr}
+  .featured-img{height:240px}
+  .featured-body{padding:28px 22px 30px}
+  .news-sidebar{gap:14px}
+  .news-list-card{padding:20px}
+  .galeri-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .galeri-item:first-child{grid-row:auto;grid-column:auto}
+  .pegawai-grid{grid-template-columns:repeat(2,1fr)}
+  .pengaduan-wrap{grid-template-columns:1fr;gap:40px;padding:36px}
+}
+@media(max-width:600px){
+  .pegawai-grid{grid-template-columns:1fr 1fr}
+}

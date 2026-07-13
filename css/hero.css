@@ -1,0 +1,87 @@
+/* ── HERO ── */
+.hero{background:var(--navy);position:relative;overflow:hidden;padding:96px 0 80px}
+.hero-bg-slider{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+}
+.hero-bg-slide{
+    position:absolute;
+    inset:0;
+    background-size:cover;
+    background-position:center;
+    transform:translateX(100%);
+    animation:heroSlideGeser 6s infinite;
+}
+.hero-bg-slide:nth-child(1){animation-delay:0s}
+.hero-bg-slide:nth-child(2){animation-delay:2s}
+.hero-bg-slide:nth-child(3){animation-delay:4s}
+
+@keyframes heroSlideGeser{
+    0%      { transform:translateX(100%); }
+    8.33%   { transform:translateX(0%); }
+    33.33%  { transform:translateX(0%); }
+    41.67%  { transform:translateX(-100%); }
+    100%    { transform:translateX(-100%); }
+}
+
+/* Gelapkan hanya sisi kiri (area teks), sisanya dibiarkan terang */
+.hero-bg-slider::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(90deg, rgba(11,31,58,.7) 0%, rgba(11,31,58,.35) 38%, rgba(11,31,58,.05) 70%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce){
+    .hero-bg-slide{animation:none;transform:translateX(0)}
+    .hero-bg-slide:not(:first-child){display:none}
+}
+.hero-pattern{position:absolute;inset:0;background-image:radial-gradient(circle at 80% 50%,rgba(200,155,60,.12) 0%,transparent 60%),radial-gradient(circle at 10% 80%,rgba(200,155,60,.06) 0%,transparent 40%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px}
+.hero-inner{
+    max-width:1200px;
+    margin:0 auto;padding:0 32px;position:relative;z-index:1;display:grid;grid-template-columns:1fr 420px;gap:60px;align-items:center}
+.hero-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(200,155,60,.15);
+    border:1px solid rgba(200,155,60,.3);
+    color:var(--navy);
+    font-size:12px;
+    font-weight:600;
+    padding:6px 14px;
+    border-radius:100px;
+    margin-bottom:22px;
+    letter-spacing:.5px;
+    text-transform:uppercase
+}
+
+.hero h2{font-family:'Playfair Display',serif;font-size:48px;line-height:1.15;color: var(--gold-light);font-weight:800;margin-bottom:18px}
+.hero h2 em{color:var(--gold-light);font-style:normal}
+.hero p{font-size:16px;color: var(--white);line-height:1.7;max-width:500px;margin-bottom:32px}
+.btn-primary{background:var(--gold);color:var(--navy);font-weight:700;font-size:14px;padding:13px 28px;border-radius:10px;text-decoration:none;transition:.2s}
+.btn-primary:hover{background:var(--gold-light)}
+.btn-outline{border:1.5px solid rgba(255,255,255,.25);color:#fff;font-weight:600;font-size:14px;padding:12px 24px;border-radius:10px;text-decoration:none;transition:.2s}
+.btn-outline:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.05)}
+.hero-stats{display:flex;flex-direction:column;gap:12px}
+.stat-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:22px 24px;backdrop-filter:blur(10px)}
+.stat-card b{display:block;font-family:'Playfair Display',serif;font-size:36px;color:#fff;font-weight:700;line-height:1}
+.stat-card span{font-size:13px;color:#7A9BBF;margin-top:4px;display:block}
+.stat-card .trend{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:#5BCEA8;background:rgba(91,206,168,.12);padding:3px 8px;border-radius:100px;margin-top:8px;font-weight:600}
+
+/* ── MARQUEE (ticker berita berjalan) ── */
+.ticker{background:var(--gold);padding:10px 0;overflow:hidden}
+.ticker-inner{display:flex;gap:60px;white-space:nowrap;animation:ticker 30s linear infinite}
+.ticker-inner span{font-size:13px;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:10px}
+.ticker-inner span::before{content:'◆';font-size:8px;opacity:.6}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .hero-stats{flex-direction:row;overflow-x:auto}
+}
+@media(max-width:600px){
+  .hero h2{font-size:32px}
+}

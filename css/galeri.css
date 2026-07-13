@@ -1,0 +1,43 @@
+/* ── GRID GALERI PENUH (Foto/Kegiatan/Prestasi) — gaya white card ── */
+.galeri-full-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.galeri-full-item{background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;transition:.25s;box-shadow:0 8px 24px rgba(11,31,58,.04)}
+.galeri-full-item:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(11,31,58,.1)}
+.galeri-full-thumb{height:170px;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--navy-mid),var(--navy-light))}
+.galeri-full-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:.35s}
+.galeri-full-item:hover .galeri-full-thumb img{transform:scale(1.06)}
+.galeri-full-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-size:30px}
+.galeri-full-body{padding:16px 18px 20px}
+.galeri-full-date{font-size:12px;color:var(--gold);font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.galeri-full-body h5{font-size:14px;font-weight:700;color:var(--navy);line-height:1.4}
+
+/* ── LIGHTBOX (klik untuk memperbesar) ── */
+.lightbox-overlay{position:fixed;inset:0;background:rgba(11,17,32,.92);display:flex;align-items:center;justify-content:center;z-index:1000;opacity:0;pointer-events:none;transition:.25s;padding:40px}
+.lightbox-overlay.active{opacity:1;pointer-events:auto}
+.lightbox-overlay img{max-width:90%;max-height:90%;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.lightbox-close{position:absolute;top:24px;right:28px;color:#fff;font-size:32px;line-height:1;cursor:pointer;opacity:.8}
+.lightbox-close:hover{opacity:1}
+
+/* ── VIDEO GRID ── */
+.video-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.video-card{background:var(--white);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(11,31,58,.04)}
+.video-frame{position:relative;width:100%;padding-top:56.25%;background:#000}
+.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-body{padding:18px 20px 22px}
+.video-body .galeri-full-date{margin-bottom:8px}
+.video-body h4{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.video-body p{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* ── PAGINATION (dipakai di semua halaman grid/daftar) ── */
+.pagination{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:44px;flex-wrap:wrap}
+.page-btn{min-width:42px;height:42px;padding:0 16px;border-radius:10px;border:1px solid var(--line);background:var(--white);color:var(--navy);font-size:14px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;transition:.2s}
+.page-btn:hover{border-color:var(--gold);color:var(--gold)}
+.page-btn.active{background:var(--navy);border-color:var(--navy);color:#fff}
+.page-btn.disabled{opacity:.4;pointer-events:none}
+
+@media(max-width:900px){
+  .galeri-full-grid{grid-template-columns:repeat(2,1fr)}
+  .video-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .galeri-full-grid{grid-template-columns:1fr}
+}
