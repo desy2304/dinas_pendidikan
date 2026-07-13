@@ -1,4 +1,7 @@
 <?php
+
+include 'koneksi.php';
+
 $per_page = 8;
 $halaman = isset($_GET['p']) ? max(1, (int) $_GET['p']) : 1;
 $offset  = ($halaman - 1) * $per_page;
