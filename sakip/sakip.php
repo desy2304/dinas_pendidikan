@@ -1,6 +1,12 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header("Location: login/login.php");
+    exit();
+}
+
 include __DIR__ . '/../koneksi.php';
-require_once __DIR__ . '/../auth.php';
 
 // ==== Label kategori ====
 $kategoriLabel = [
@@ -155,7 +161,7 @@ if ($r = mysqli_query($koneksi, "SELECT DISTINCT tahun FROM sakip ORDER BY tahun
 
     <!-- SIDEBAR -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../dashboard/index.php">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../index.php">
             <div class="sidebar-brand-icon">
                 <i><img src="../img/Logo1.png" alt="" style="width:60px;height:60px;object-fit:contain;"></i>
             </div>
@@ -165,7 +171,7 @@ if ($r = mysqli_query($koneksi, "SELECT DISTINCT tahun FROM sakip ORDER BY tahun
             </div>
         </a>
         <hr class="sidebar-divider my-0">
-        <li class="nav-item"><a class="nav-link" href="../dashboard/index.php"><i class="fas fa-fw fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="../index.php"><i class="fas fa-fw fa-tachometer-alt"></i><span>Dashboard</span></a></li>
         <li class="nav-item"><a class="nav-link" href="../berita/berita.php"><i class="fas fa-fw fa-newspaper"></i><span>Berita</span></a></li>
         <li class="nav-item"><a class="nav-link" href="../pengumuman/pengumuman.php"><i class="fas fa-fw fa-bullhorn"></i><span>Pengumuman</span></a></li>
         <li class="nav-item">

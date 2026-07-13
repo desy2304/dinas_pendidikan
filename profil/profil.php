@@ -1,6 +1,12 @@
 ﻿<?php
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header("Location: login/login.php");
+    exit();
+}
+
 include_once __DIR__ . '/../koneksi.php';
-require_once __DIR__ . '/../auth.php';
 
 // ==== Ambil data profil dari database (singleton row id=1) ====
 $profil = [];
@@ -118,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['aksi']) && $_POST['ak
 
     <!-- ===== SIDEBAR ===== -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../dashboard/index.php">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../index.php">
             <div class="sidebar-brand-icon">
                 <i><img src="../img/Logo1.png" alt="" style="width:60px;height:60px;object-fit:contain;"></i>
             </div>
@@ -129,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['aksi']) && $_POST['ak
         </a>
         <hr class="sidebar-divider my-0">
         <li class="nav-item">
-            <a class="nav-link" href="../dashboard/index.php">
+            <a class="nav-link" href="../index.php">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span>
             </a>

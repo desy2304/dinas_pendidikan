@@ -1,6 +1,11 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header("Location: login/login.php");
+    exit();
+}
 include __DIR__ . '/../koneksi.php';
-require_once __DIR__ . '/../auth.php';
 
 // ==== Filter per bulan dari GET ====
 $filterBulan = $_GET['bulan'] ?? ''; // format: YYYY-MM
@@ -172,7 +177,7 @@ function formatTanggalIndo($tgl, $bulanIndo) {
 
     <!-- SIDEBAR -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../dashboard/index.php">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../index.php">
             <div class="sidebar-brand-icon">
                 <i><img src="../img/Logo1.png" alt="" style="width:60px;height:60px;object-fit:contain;"></i>
             </div>
@@ -182,7 +187,7 @@ function formatTanggalIndo($tgl, $bulanIndo) {
             </div>
         </a>
         <hr class="sidebar-divider my-0">
-        <li class="nav-item"><a class="nav-link" href="../dashboard/index.php"><i class="fas fa-fw fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="../index.php"><i class="fas fa-fw fa-tachometer-alt"></i><span>Dashboard</span></a></li>
         <li class="nav-item"><a class="nav-link" href="../berita/berita.php"><i class="fas fa-fw fa-newspaper"></i><span>Berita</span></a></li>
         <li class="nav-item"><a class="nav-link" href="../pengumuman/pengumuman.php"><i class="fas fa-fw fa-bullhorn"></i><span>Pengumuman</span></a></li>
         <!-- Nav Item - Galeri -->
@@ -199,13 +204,14 @@ function formatTanggalIndo($tgl, $bulanIndo) {
                 </div>
             </div>
         </li>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="../pengaduan/pengaduan.php"><i class="fas fa-fw fa-exclamation-triangle"></i><span>Pengaduan</span></a></li>
         <!-- Nav Item - Sakip -->
         <li class="nav-item">
             <a class="nav-link" href="../sakip/sakip.php">
                 <i class="fas fa-fw fa-file-contract"></i>
                 <span>Sakip</span></a>
         </li>
-        <li class="nav-item"><a class="nav-link" href="../pengaduan/pengaduan.php"><i class="fas fa-fw fa-exclamation-triangle"></i><span>Pengaduan</span></a></li>
         <hr class="sidebar-divider">
         <div class="sidebar-heading">Instansi</div>
         <li class="nav-item"><a class="nav-link" href="../profil/profil.php"><i class="fas fa-fw fa-user"></i><span>Profil</span></a></li>
@@ -379,7 +385,7 @@ function formatTanggalIndo($tgl, $bulanIndo) {
                              data-title="<?= htmlspecialchars(strtolower($g['judul']), ENT_QUOTES) ?>"
                              data-date="<?= htmlspecialchars(strtolower($tglTampil), ENT_QUOTES) ?>">
                             <span class="prestasi-ribbon"><i class="fas fa-trophy"></i> Prestasi</span>
-                            <img src="<?= $gambarAda ? '../' . htmlspecialchars($g['gambar']) : '../img/undraw_posting_photo.svg' ?>"
+                            <img src="<?= $gambarAda ? '../' . htmlspecialchars($g['gambar']) : '../uploads/galeri' ?>"
                                  alt="<?= htmlspecialchars($g['judul']) ?>">
                             <div class="gallery-item-info">
                                 <p class="gallery-item-title"><?= htmlspecialchars($g['judul']) ?></p>
@@ -572,7 +578,7 @@ function openEditPrestasi(btn) {
     document.getElementById('edit-judul').value       = d.judul;
     document.getElementById('edit-tanggal').value     = d.tanggal;
     document.getElementById('edit-keterangan').value  = d.keterangan || '';
-    document.getElementById('edit-gambar-preview').src = d.gambar || '../img/undraw_posting_photo.svg';
+    document.getElementById('edit-gambar-preview').src = d.gambar || '../uploads/galeri';
     $('#editPrestasiModal').modal('show');
 }
 

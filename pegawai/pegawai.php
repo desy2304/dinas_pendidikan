@@ -1,6 +1,12 @@
 ﻿<?php
+session_start();
+
+if (!isset($_SESSION['user'])) {
+    header("Location: login/login.php");
+    exit();
+}
+
 include __DIR__ . '/../koneksi.php';
-require_once __DIR__ . '/../auth.php';
 
 // ==== Statistik ====
 $totalPegawai = 0;
@@ -175,7 +181,7 @@ if ($r = mysqli_query($koneksi, $sqlPegawai)) {
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../dashboard/index.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../index.php">
                 <div class="sidebar-brand-icon">
                     <i><img src="../img/Logo1.png" alt="" style="width: 60px; height: 60px; object-fit: contain;"></i>
                 </div>
@@ -190,7 +196,7 @@ if ($r = mysqli_query($koneksi, $sqlPegawai)) {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="../dashboard/index.php">
+                <a class="nav-link" href="../index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
