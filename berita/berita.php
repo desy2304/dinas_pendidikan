@@ -1,11 +1,6 @@
 ﻿<?php
-session_start();
 include __DIR__ . '/../koneksi.php';
-
-if (!isset($_SESSION['user'])) {
-    header("Location: ../login/login.php");
-    exit();
-}
+require_once __DIR__ . '/../auth.php';
 
 // ==== Daftar kategori untuk dropdown form tambah berita ====
 $kategoriList = [];
@@ -268,7 +263,6 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="../galeri/galeri_foto.php">Foto</a>
-                        <a class="collapse-item" href="../galeri/galeri_video.php">Video</a>
                         <a class="collapse-item" href="../galeri/galeri_prestasi.php">Prestasi</a>
                     </div>
                 </div>

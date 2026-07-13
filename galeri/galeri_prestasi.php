@@ -1,11 +1,6 @@
 <?php
-session_start();
 include __DIR__ . '/../koneksi.php';
-
-if (!isset($_SESSION['user'])) {
-    header("Location: ../login/login.php");
-    exit();
-}
+require_once __DIR__ . '/../auth.php';
 
 // ==== Filter per bulan dari GET ====
 $filterBulan = $_GET['bulan'] ?? ''; // format: YYYY-MM
@@ -200,7 +195,6 @@ function formatTanggalIndo($tgl, $bulanIndo) {
             <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="../galeri/galeri_foto.php">Foto</a>
-                    <a class="collapse-item" href="../galeri/galeri_video.php">Video</a>
                     <a class="collapse-item active" href="../galeri/galeri_prestasi.php">Prestasi</a>
                 </div>
             </div>

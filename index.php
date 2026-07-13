@@ -1,14 +1,10 @@
 ﻿<?php
-$title = "Home";
-$page = "home";
-include __DIR__ . '/../koneksi.php';
-
 session_start();
+include_once("proses_login.php");
 
-if (!isset($_SESSION['user'])) {
-    header("Location: ../login/login.php");
-    exit();
-}
+header("Location: login/login.php");
+
+include 'koneksi.php';
 
 // ==== Tanggal dinamis (format Indonesia) ====
 $hariList  = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', "Jum'at", 'Sabtu'];
@@ -244,7 +240,6 @@ if ($r = mysqli_query($koneksi, $sqlPengaduanTerbaru)) {
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="../galeri/galeri_foto.php">Foto</a>
-                        <a class="collapse-item" href="../galeri/galeri_video.php">Video</a>
                         <a class="collapse-item" href="../galeri/galeri_prestasi.php">Prestasi</a>
                     </div>
                 </div>
