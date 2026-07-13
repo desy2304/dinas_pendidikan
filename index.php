@@ -76,7 +76,6 @@ if (!file_exists($file)) {
         <a href="#" class="drop-toggle">Galeri</a>
         <div class="dropdown-menu">
           <a href="?page=galeri_foto">Foto</a>
-          <a href="?page=galeri_video">Video</a>
           <a href="?page=galeri_prestasi">Prestasi</a>
         </div>
       </div>
