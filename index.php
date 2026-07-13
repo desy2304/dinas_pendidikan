@@ -1,6 +1,6 @@
 <?php
 // Koneksi database
-include 'koneksi.php';
+require_once __DIR__ . '/koneksi.php';
 
 // Tentukan halaman yang diminta (default: home)
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';

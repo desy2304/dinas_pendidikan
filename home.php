@@ -1,4 +1,6 @@
 <?php
+
+include 'koneksi.php';
 // Ambil data profil (visi, misi)
 $query_profil = "SELECT visi, misi FROM profil LIMIT 1";
 $result_profil = mysqli_query($conn, $query_profil);
