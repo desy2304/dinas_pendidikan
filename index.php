@@ -8,12 +8,10 @@ if (!isset($_SESSION['user'])) {
 
 include 'koneksi.php';
 
-// ==== Tanggal dinamis (format Indonesia) ====
 $hariList  = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', "Jum'at", 'Sabtu'];
 $bulanList = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 $tanggalHariIni = $hariList[date('w')] . ', ' . date('j') . ' ' . $bulanList[(int)date('n')] . ' ' . date('Y');
 
-// ==== Label kategori & status pengaduan (sesuai ENUM di database) ====
 $kategoriLabel = [
     'sarana_prasarana' => 'Sarana & Prasarana',
     'kepegawaian'      => 'Kepegawaian',
@@ -27,9 +25,6 @@ $statusBadge = [
     'ditutup'    => ['label' => 'Selesai',    'class' => 'badge-success'],
 ];
 
-// ==================================================================
-// ==== FILTER PERIODE: Semua Waktu / Per Bulan / Per Hari ====
-// ==================================================================
 $filterMode = $_GET['filter'] ?? 'semua'; // semua | bulan | hari
 if (!in_array($filterMode, ['semua', 'bulan', 'hari'], true)) {
     $filterMode = 'semua';
@@ -38,7 +33,6 @@ if (!in_array($filterMode, ['semua', 'bulan', 'hari'], true)) {
 $filterBulanInput = $_GET['bulan'] ?? date('Y-m');
 $filterHariInput  = $_GET['tanggal'] ?? date('Y-m-d');
 
-// Klausa WHERE untuk masing-masing tabel (default: tanpa filter / semua waktu)
 $whereBerita     = '';
 $wherePengumuman = "WHERE status = 'terbit'";
 $wherePengaduan  = '1=1';
@@ -66,7 +60,6 @@ if ($filterMode === 'bulan' && preg_match('/^\d{4}-\d{2}$/', $filterBulanInput))
     $filterMode = 'semua';
 }
 
-// ==== Statistik kartu (mengikuti filter periode) ====
 $totalBerita = 0;
 if ($r = mysqli_query($koneksi, "SELECT COUNT(*) AS jml FROM berita $whereBerita")) {
     $totalBerita = mysqli_fetch_assoc($r)['jml'];
@@ -87,11 +80,9 @@ if ($r = mysqli_query($koneksi, "SELECT COUNT(*) AS jml FROM pengaduan WHERE sta
     $pengaduanSelesai = mysqli_fetch_assoc($r)['jml'];
 }
 
-// ==== Pengaduan untuk tabel dashboard ====
-// Tanpa filter: tampilkan 5 terbaru (preview). Dengan filter: tampilkan semua pada periode terpilih.
 $batasTampil = ($filterMode === 'semua') ? ' LIMIT 5' : '';
 $pengaduanTerbaru = [];
-$sqlPengaduanTerbaru = "SELECT no_tiket, nama, kategori, status FROM pengaduan WHERE $wherePengaduan ORDER BY created_at DESC" . $batasTampil;
+$sqlPengaduanTerbaru = "SELECT id, no_tiket, nama, kategori, status FROM pengaduan WHERE $wherePengaduan ORDER BY created_at DESC" . $batasTampil;
 if ($r = mysqli_query($koneksi, $sqlPengaduanTerbaru)) {
     while ($row = mysqli_fetch_assoc($r)) {
         $pengaduanTerbaru[] = $row;
@@ -109,15 +100,10 @@ if ($r = mysqli_query($koneksi, $sqlPengaduanTerbaru)) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Dashboard Admin - Disdik Sumenep</title>
 
-    <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
@@ -159,7 +145,6 @@ if ($r = mysqli_query($koneksi, $sqlPengaduanTerbaru)) {
             background-image: none !important;
         }
 
-        /* ==== Filter Periode ==== */
         .filter-periode-card .form-inline .form-control {
             min-width: 150px;
         }
@@ -198,9 +183,9 @@ if ($r = mysqli_query($koneksi, $sqlPengaduanTerbaru)) {
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../dashboard/index.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
                 <div class="sidebar-brand-icon">
-                    <i><img src="../img/Logo1.png" alt="" style="width: 60px; height: 60px; object-fit: contain;"></i>
+                    <i><img src="img/Logo1.png" alt="" style="width: 60px; height: 60px; object-fit: contain;"></i>
                 </div>
                 <div class="d-flex flex-column" style="color: #fff !important;">
                     <div style="font-size: 0.7rem;">Dinas Pendidikan</div>
@@ -213,21 +198,21 @@ if ($r = mysqli_query($koneksi, $sqlPengaduanTerbaru)) {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="../dashboard/index.php">
+                <a class="nav-link" href="index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
             <!-- Nav Item - Berita -->
             <li class="nav-item">
-                <a class="nav-link" href="../berita/berita.php">
+                <a class="nav-link" href="berita/berita.php">
                     <i class="fas fa-fw fa-newspaper"></i>
                     <span>Berita</span></a>
             </li>
 
             <!-- Nav Item - Pengumuman -->
             <li class="nav-item">
-                <a class="nav-link" href="../pengumuman/pengumuman.php">
+                <a class="nav-link" href="pengumuman/pengumuman.php">
                     <i class="fas fa-fw fa-bullhorn"></i>
                     <span>Pengumuman</span></a>
             </li>
@@ -241,22 +226,22 @@ if ($r = mysqli_query($koneksi, $sqlPengaduanTerbaru)) {
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="../galeri/galeri_foto.php">Foto</a>
-                        <a class="collapse-item" href="../galeri/galeri_prestasi.php">Prestasi</a>
+                        <a class="collapse-item" href="galeri/galeri_foto.php">Foto</a>
+                        <a class="collapse-item" href="galeri/galeri_prestasi.php">Prestasi</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Pengaduan -->
             <li class="nav-item">
-                <a class="nav-link" href="../pengaduan/pengaduan.php">
+                <a class="nav-link" href="pengaduan/pengaduan.php">
                     <i class="fas fa-fw fa-exclamation-triangle"></i>
                     <span>Pengaduan</span></a>
             </li>
 
             <!-- Nav Item - Sakip -->
             <li class="nav-item">
-                <a class="nav-link" href="../sakip/sakip.php">
+                <a class="nav-link" href="sakip/sakip.php">
                     <i class="fas fa-fw fa-file-contract"></i>
                     <span>Sakip</span></a>
             </li>
@@ -271,21 +256,21 @@ if ($r = mysqli_query($koneksi, $sqlPengaduanTerbaru)) {
 
             <!-- Nav Item - Profil -->
             <li class="nav-item">
-                <a class="nav-link" href="../profil/profil.php">
+                <a class="nav-link" href="profil/profil.php">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Profil</span></a>
             </li>
 
             <!-- Nav Item - Pegawai -->
             <li class="nav-item">
-                <a class="nav-link" href="../pegawai/pegawai.php">
+                <a class="nav-link" href="pegawai/pegawai.php">
                     <i class="fas fa-fw fa-user-friends"></i>
                     <span>Pegawai</span></a>
             </li>
 
             <!-- Nav Item - Bidang -->
             <li class="nav-item">
-                <a class="nav-link" href="../bidang/bidang.php">
+                <a class="nav-link" href="bidang/bidang.php">
                     <i class="fas fa-fw fa-building"></i>
                     <span>Bidang</span></a>
             </li>
@@ -322,7 +307,7 @@ if ($r = mysqli_query($koneksi, $sqlPengaduanTerbaru)) {
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= htmlspecialchars($_SESSION['user']['name'] ?? 'Admin') ?></span>
                                 <img class="img-profile rounded-circle"
-                                    src="../img/undraw_profile.svg">
+                                    src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -333,14 +318,12 @@ if ($r = mysqli_query($koneksi, $sqlPengaduanTerbaru)) {
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400        "></i>
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
                             </div>
                         </li>
-
                     </ul>
-
                 </nav>
                 <!-- End of Topbar -->
 
@@ -353,8 +336,6 @@ if ($r = mysqli_query($koneksi, $sqlPengaduanTerbaru)) {
                             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
                             <div class="text-muted small"><?= $tanggalHariIni ?></div>
                         </div>
-                        <a href="../pengaduan/generate_laporan_pengaduan.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm text-light"><i
-                                class="fas fa-download fa-sm text-white"></i> Unduh Laporan</a>
                     </div>
 
                     <!-- Filter Periode -->
@@ -476,6 +457,7 @@ if ($r = mysqli_query($koneksi, $sqlPengaduanTerbaru)) {
                                                 <th>Pengadu</th>
                                                 <th>Kategori</th>
                                                 <th>Status</th>
+                                                <th style="width:120px">Aksi</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -484,12 +466,13 @@ if ($r = mysqli_query($koneksi, $sqlPengaduanTerbaru)) {
                                                 <th>Pengadu</th>
                                                 <th>Kategori</th>
                                                 <th>Status</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
                                             <?php if (empty($pengaduanTerbaru)) : ?>
                                                 <tr>
-                                                    <td colspan="4" class="text-center text-muted">Tidak ada pengaduan pada periode ini.</td>
+                                                    <td colspan="5" class="text-center text-muted">Tidak ada pengaduan pada periode ini.</td>
                                                 </tr>
                                             <?php else : ?>
                                                 <?php foreach ($pengaduanTerbaru as $p) :
@@ -501,6 +484,12 @@ if ($r = mysqli_query($koneksi, $sqlPengaduanTerbaru)) {
                                                         <td><?= htmlspecialchars($p['nama']) ?></td>
                                                         <td><?= htmlspecialchars($kat) ?></td>
                                                         <td><span class="badge <?= $st['class'] ?>"><?= $st['label'] ?></span></td>
+                                                        <td>
+                                                            <a href="unduh_laporan_pengaduan.php?id=<?= (int)$p['id'] ?>"
+                                                               class="btn btn-sm btn-primary" style="color:#fff;" title="Unduh laporan PDF">
+                                                                <i class="fas fa-file-download"></i> Unduh
+                                                            </a>
+                                                        </td>
                                                     </tr>
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
@@ -511,7 +500,6 @@ if ($r = mysqli_query($koneksi, $sqlPengaduanTerbaru)) {
                         </div>
                     </div>
                 </div>
-                <!-- /.container-fluid -->
             </div>
             <!-- End of Main Content -->
 
@@ -524,10 +512,8 @@ if ($r = mysqli_query($koneksi, $sqlPengaduanTerbaru)) {
                 </div>
             </footer>
             <!-- End of Footer -->
-
         </div>
         <!-- End of Content Wrapper -->
-
     </div>
     <!-- End of Page Wrapper -->
 
@@ -550,7 +536,7 @@ if ($r = mysqli_query($koneksi, $sqlPengaduanTerbaru)) {
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="../login/login.php">Logout</a>
+                    <a class="btn btn-primary" href="login/login.php">Logout</a>
                 </div>
             </div>
         </div>

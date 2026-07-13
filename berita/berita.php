@@ -1,8 +1,13 @@
 ﻿<?php
-include __DIR__ . '/../koneksi.php';
-require_once __DIR__ . '/../auth.php';
+session_start();
 
-// ==== Daftar kategori untuk dropdown form tambah berita ====
+if (!isset($_SESSION['user'])) {
+    header("Location: login/login.php");
+    exit();
+}
+
+include __DIR__ . '/../koneksi.php';
+
 $kategoriList = [];
 if ($r = mysqli_query($koneksi, "SELECT id, nama FROM kategori_berita ORDER BY nama")) {
     while ($row = mysqli_fetch_assoc($r)) {
@@ -10,10 +15,7 @@ if ($r = mysqli_query($koneksi, "SELECT id, nama FROM kategori_berita ORDER BY n
     }
 }
 
-// ==================================================================
-// ==== FILTER PERIODE: Semua Waktu / Per Bulan / Per Hari ====
-// ==================================================================
-$filterMode = $_GET['filter'] ?? 'semua'; // semua | bulan | hari
+$filterMode = $_GET['filter'] ?? 'semua';
 if (!in_array($filterMode, ['semua', 'bulan', 'hari'], true)) {
     $filterMode = 'semua';
 }
@@ -21,7 +23,6 @@ if (!in_array($filterMode, ['semua', 'bulan', 'hari'], true)) {
 $filterBulanInput = $_GET['bulan'] ?? date('Y-m');
 $filterHariInput  = $_GET['tanggal'] ?? date('Y-m-d');
 
-// Klausa WHERE untuk masing-masing tabel (default: tanpa filter / semua waktu)
 $hariList  = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', "Jum'at", 'Sabtu'];
 $bulanList = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
@@ -53,7 +54,6 @@ if ($filterMode === 'bulan' && preg_match('/^\d{4}-\d{2}$/', $filterBulanInput))
     $filterMode = 'semua';
 }
 
-// ==== Statistik kartu ====
 $totalBerita = 0;
 if ($r = mysqli_query($koneksi, "SELECT COUNT(*) AS jml FROM berita")) {
     $totalBerita = mysqli_fetch_assoc($r)['jml'];
@@ -71,7 +71,6 @@ if ($r = mysqli_query($koneksi, "SELECT COUNT(*) AS jml FROM berita WHERE status
 
 $kategoriAktif = count($kategoriList);
 
-// ==== Notifikasi hasil aksi (tambah/edit/hapus) ====
 $notif = $_GET['notif'] ?? null;
 $notifMsg = [
     'sukses_tambah' => ['type' => 'success', 'text' => 'Berita berhasil ditambahkan.',      'icon' => 'fa-check-circle'],
@@ -83,7 +82,6 @@ $notifMsg = [
     'not_found'     => ['type' => 'danger',  'text' => 'Data berita tidak ditemukan.',       'icon' => 'fa-exclamation-circle'],
 ];
 
-// ==== Daftar berita beserta nama kategori ====
 $daftarBerita = [];
 $sqlBerita = "SELECT b.id, b.judul, b.slug, b.gambar, b.status, b.kategori_id, b.isi, b.tanggal_publish, b.created_at,
                      k.nama AS kategori_nama
@@ -100,7 +98,6 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset="utf-8">
@@ -109,15 +106,11 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Berita</title>
+    <title>Manajemen Berita - Disdik Sumenep</title>
 
-    <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-    <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
@@ -181,7 +174,6 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
             border-radius: 4px;
         }
 
-        /* ==== Filter Periode ==== */
         .filter-periode-card .form-inline .form-control {
             min-width: 150px;
         }
@@ -219,7 +211,7 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../dashboard/index.php" style="color: #fff !important;">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../index.php" style="color: #fff !important;">
                 <div class="sidebar-brand-icon">
                     <i><img src="../img/Logo1.png" alt="" style="width: 60px; height: 60px; object-fit: contain;"></i>
                 </div>
@@ -234,14 +226,14 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="../dashboard/index.php">
+                <a class="nav-link" href="../index.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
             <!-- Nav Item - Berita -->
             <li class="nav-item active">
-                <a class="nav-link" href="../berita/berita.php">
+                <a class="nav-link" href="berita.php">
                     <i class="fas fa-fw fa-newspaper"></i>
                     <span>Berita</span></a>
             </li>
@@ -359,9 +351,7 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
                                 </a>
                             </div>
                         </li>
-
                     </ul>
-
                 </nav>
                 <!-- End of Topbar -->
 
@@ -553,13 +543,12 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
                                                                     <i class="fas fa-pen"></i>
                                                                 </button>
 
-                                                                <form method="POST" action="hapus_berita.php" style="display:inline;"
-                                                                    onsubmit="return confirm('Yakin ingin menghapus berita \'<?= htmlspecialchars(addslashes($b['judul'])) ?>\'? Tindakan ini tidak bisa dibatalkan.');">
-                                                                    <input type="hidden" name="id" value="<?= (int)$b['id'] ?>">
-                                                                    <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
-                                                                        <i class="fas fa-trash"></i>
-                                                                    </button>
-                                                                </form>
+                                                                <button class="btn btn-danger btn-sm btn-hapus ml-1"
+                                                                    data-id="<?= $b['id'] ?>"
+                                                                    data-judul="<?= htmlspecialchars($b['judul'], ENT_QUOTES) ?>"
+                                                                    title="Hapus" style="padding:4px 8px;">
+                                                                    <i class="fas fa-trash"></i>
+                                                                </button>
                                                             </div>
 
                                                             <textarea id="isi-data-<?= (int)$b['id'] ?>" style="display:none;"><?= htmlspecialchars($b['isi'] ?? '') ?></textarea>
@@ -586,10 +575,8 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
                 </div>
             </footer>
             <!-- End of Footer -->
-
         </div>
         <!-- End of Content Wrapper -->
-
     </div>
     <!-- End of Page Wrapper -->
 
@@ -734,6 +721,33 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
         </div>
     </div>
 
+    <div class="modal fade" id="modalHapus" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background:#e74a3b;">
+                    <h5 class="modal-title text-white"><i class="fas fa-trash mr-2"></i>Hapus Berita</h5>
+                    <button class="close text-white" type="button" data-dismiss="modal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                    <p>Yakin ingin menghapus berita:</p>
+                    <p class="font-weight-bold" id="hapusJudul"></p>
+                    <p class="text-muted small">Tindakan ini tidak bisa dibatalkan.</p>
+                </div>
+                <div class="modal-footer">
+                    <form action="hapus_berita.php" method="POST">
+                        <input type="hidden" name="aksi" value="hapus">
+                        <input type="hidden" name="id" id="hapusId">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash mr-1"></i>Hapus
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Tambah Kategori Baru -->
     <div class="modal fade" id="tambahKategoriModal" tabindex="-1" role="dialog" aria-labelledby="tambahKategoriModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -823,7 +837,6 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
             $('#editBeritaModal').modal('show');
         }
 
-        // Notifikasi otomatis hilang setelah beberapa detik + bersihkan URL
         (function () {
             var alertBox = document.getElementById('notifAlert');
             if (alertBox) {
@@ -836,7 +849,8 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
                 window.history.replaceState(null, '', cleanUrl);
             }
         })();
-        // ==== Tambah Kategori Baru (dari modal Tambah/Edit Berita) ====
+
+        
         var sumberKategoriModal = null;
 
         function bukaTambahKategori(sumber) {
@@ -911,8 +925,13 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
                     errBox.classList.remove('d-none');
                 });
         }
+
+        $('.btn-hapus').on('click', function () {
+            $('#hapusId').val($(this).data('id'));
+            $('#hapusJudul').text($(this).data('judul'));
+            $('#modalHapus').modal('show');
+        });
     </script>
 
 </body>
-
 </html>
