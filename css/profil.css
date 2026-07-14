@@ -7,7 +7,7 @@
 }
 .profile-summary-text,
 .profile-card-block{
-    background:var(--white);
+    background:var(--navy);
     border:1px solid var(--line);
     border-radius:18px;
     padding:24px 26px;
@@ -17,7 +17,7 @@
 .profile-card-block p{
     font-size:15px;
     line-height:1.8;
-    color:var(--text);
+    color:var(--white);
     margin-bottom:12px;
 }
 .profile-card-block h3{

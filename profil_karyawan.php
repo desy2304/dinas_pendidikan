@@ -1,4 +1,7 @@
 <?php
+
+include 'koneksi.php';
+
 $per_page = 9;
 $halaman = isset($_GET['p']) ? max(1, (int) $_GET['p']) : 1;
 $offset  = ($halaman - 1) * $per_page;
@@ -33,7 +36,7 @@ function inisial_nama(string $nama) {
 
 <section class="section" style="padding-bottom:10px">
   <div class="section-inner">
-    <a href="?page=home" style="display:inline-flex;align-items:center;gap:6px;color:var(--navy);font-weight:600;font-size:14px;text-decoration:none;margin-bottom:20px">&larr; Kembali ke Beranda</a>
+    <a href="?page=home" class="btn-back">&larr; Kembali ke Beranda</a>
     <div class="section-label">Sumber Daya Manusia</div>
     <div class="section-title">Data Karyawan</div>
   </div>

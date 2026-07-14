@@ -1,4 +1,7 @@
 <?php
+
+include 'koneksi.php';
+
 $q_profil = "SELECT * FROM profil LIMIT 1";
 $r_profil = mysqli_query($conn, $q_profil);
 $profil = $r_profil ? mysqli_fetch_assoc($r_profil) : null;

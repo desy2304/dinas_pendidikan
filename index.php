@@ -58,7 +58,7 @@ if (!file_exists($file)) {
           <a href="?page=profil_struktur">Struktur Organisasi</a>
           <a href="?page=profil_karyawan">Data Karyawan</a>
           <a href="?page=profil_tupoksi">Tugas Pokok Dan Fungsi</a>
-          <a href="?page=profil_peta">Peta Sekolah</a>
+          <a href="?page=profil_peta">Peta</a>
           <a href="?page=profil_kegiatan">Kegiatan</a>
         </div>
       </div>

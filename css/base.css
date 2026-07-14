@@ -43,7 +43,21 @@ section[id]{scroll-margin-top:96px}
 .layanan-card p{font-size:12.5px;color:var(--muted);line-height:1.5}
 
 /* ── TOMBOL KEMBALI ── */
-.btn-back{display:inline-flex;align-items:center;gap:6px;color:var(--navy);font-weight:600;font-size:13.5px;text-decoration:none;background:var(--white);border:1px solid var(--line);padding:9px 16px;border-radius:100px;margin-bottom:20px;transition:.2s}
+.btn-back{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:var(--navy);
+  font-weight:600;
+  font-size:13.5px;
+  text-decoration:none;
+  background:var(--gold-light);
+  border:1px solid var(--line);
+  padding:9px 16px;
+  border-radius:100px;
+  margin-bottom:20px;
+  transition:.2s
+}
 .btn-back:hover{background:var(--navy);color:#fff;border-color:var(--navy);transform:translateX(-2px)}
 
 /* ── REVEAL ON SCROLL (IntersectionObserver) ── */
