@@ -22,12 +22,12 @@
 }
 .profile-card-block h3{
     font-size:20px;
-    color:var(--navy);
+    color:var(--white);
     margin-bottom:10px;
 }
 .profile-card-block ul{
     padding-left:18px;
-    color:var(--text);
+    color:var(--white);
     line-height:1.8;
 }
 

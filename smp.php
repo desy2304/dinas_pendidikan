@@ -4,7 +4,8 @@
   <div class="section-inner">
     <div class="section-head">
       <div>
-        <div class="section-label">Satuan Pendidikan</div>
+        <a href="?page=home" class="btn-back">&larr; Kembali ke Beranda</a>
+        <div class="section-label">Bidang</div>
         <div class="section-title">SMP (Sekolah Menengah Pertama)</div>
       </div>
     </div>

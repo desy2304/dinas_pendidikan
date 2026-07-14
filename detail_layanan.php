@@ -7,7 +7,7 @@ $layanan = $daftar_layanan[$slug] ?? null;
 
 <section class="section" style="padding-bottom:10px">
   <div class="section-inner">
-    <a href="?page=layanan_publik" style="display:inline-flex;align-items:center;gap:6px;color:var(--navy);font-weight:600;font-size:14px;text-decoration:none;margin-bottom:20px">&larr; Kembali ke Layanan Publik</a>
+    <a href="?page=layanan_publik" class="btn-back">&larr; Kembali ke Layanan Publik</a>
 
     <?php if (!$layanan): ?>
       <div class="section-label">Layanan Publik</div>

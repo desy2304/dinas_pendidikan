@@ -58,7 +58,38 @@ section[id]{scroll-margin-top:96px}
   margin-bottom:20px;
   transition:.2s
 }
-.btn-back:hover{background:var(--navy);color:#fff;border-color:var(--navy);transform:translateX(-2px)}
+
+
+.btn-back:hover{
+  background:var(--navy);
+  color:#fff;
+  border-color:var(--navy);
+  transform:translateX(-2px)
+}
+
+.btn-next{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  color:var(--navy);
+  font-weight:600;
+  font-size:13.5px;
+  text-decoration:none;
+  background:var(--gold-light);
+  border:1px solid var(--line);
+  padding:9px 16px;
+  border-radius:100px;
+  margin-bottom:20px;
+  transition:.2s
+}
+
+.btn-next:hover{
+  background:var(--navy);
+  color:#fff;
+  border-color:var(--navy);
+  transform:translateX(-2px)
+}
+
 
 /* ── REVEAL ON SCROLL (IntersectionObserver) ── */
 .reveal{opacity:0;transform:translateY(12px);transition:opacity .45s var(--reveal-easing),transform .45s var(--reveal-easing);will-change:opacity,transform}

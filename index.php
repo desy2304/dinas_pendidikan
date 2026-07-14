@@ -63,7 +63,7 @@ if (!file_exists($file)) {
         </div>
       </div>
       <div class="nav-item dropdown">
-        <a href="#" class="drop-toggle">Satuan Pendidikan</a>
+        <a href="#" class="drop-toggle">Bidang - Bidang</a>
         <div class="dropdown-menu">
           <a href="?page=sekretariat">Sekretariat</a>
           <a href="?page=paud">PAUD dan PNF</a>
@@ -85,16 +85,6 @@ if (!file_exists($file)) {
           <a href="?page=layanan_publik">Layanan Publik</a>
           <a href="?page=layanan_sakip">Sakip</a>
           <a href="?page=layanan_faq">FAQ</a>
-        </div>
-      </div>
-      <div class="nav-item dropdown">
-        <a href="#" class="drop-toggle">Tautan</a>
-        <div class="dropdown-menu">
-          <a href="?page=eboss">E-Boss</a>
-          <a href="?page=epegawai">E-Pegawai</a>
-          <a href="?page=ebudaya">E-Budaya</a>
-          <a href="?page=eskm">E-SKM</a>
-          <a href="?page=simantap">SIMANTAP</a>
         </div>
       </div>
     </nav>

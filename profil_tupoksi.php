@@ -1,11 +1,14 @@
 <?php
+
+include 'koneksi.php';
+
 $q_bidang = "SELECT * FROM bidang ORDER BY id ASC";
 $r_bidang = mysqli_query($conn, $q_bidang);
 ?>
 
 <section class="section" style="padding-bottom:10px">
   <div class="section-inner">
-    <a href="?page=home" class="btn-back">&larr; Kembali ke Profil</a>
+    <a href="?page=home" class="btn-back">&larr; Kembali ke Beranda</a>
     <div class="section-label">Landasan Kerja</div>
     <div class="section-title">Tugas Pokok dan Fungsi</div>
   </div>

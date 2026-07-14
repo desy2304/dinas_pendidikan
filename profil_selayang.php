@@ -9,7 +9,7 @@ $profil = $r_profil ? mysqli_fetch_assoc($r_profil) : null;
 
 <section class="section" style="padding-bottom:10px">
   <div class="section-inner">
-    <a href="?page=home" class="btn-back">&larr; Kembali ke Profil</a>
+    <a href="?page=home" class="btn-back">&larr; Kembali ke Beranda</a>
     <div class="section-label">Profil Instansi</div>
     <div class="section-title">Selayang Pandang</div>
   </div>

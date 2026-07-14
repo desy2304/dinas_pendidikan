@@ -1,6 +1,6 @@
 <section class="section" style="padding-bottom:10px">
   <div class="section-inner">
-    <a href="?page=home" class="btn-back">&larr; Kembali ke Profil</a>
+    <a href="?page=home" class="btn-back">&larr; Kembali ke Beranda</a>
     <div class="section-label">Bagan Kelembagaan</div>
     <div class="section-title">Struktur Organisasi</div>
   </div>
