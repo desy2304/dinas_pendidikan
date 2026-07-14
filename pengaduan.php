@@ -1,4 +1,7 @@
 <?php
+
+include 'koneksi.php';
+
 $no_tiket = isset($_GET['no_tiket']) ? trim($_GET['no_tiket']) : '';
 $is_new   = isset($_GET['new']) && $_GET['new'] == '1';
 
@@ -37,7 +40,7 @@ $status_label = [
 
 <section class="section" style="padding-bottom:10px">
   <div class="section-inner">
-    <a href="?page=home" style="display:inline-flex;align-items:center;gap:6px;color:var(--navy);font-weight:600;font-size:14px;text-decoration:none;margin-bottom:20px">&larr; Kembali ke Beranda</a>
+    <a href="?page=home" class="btn-back">&larr; Kembali ke Beranda</a>
     <div class="section-label">Layanan Aspirasi</div>
     <div class="section-title">Cek Status Pengaduan</div>
     <p class="section-sub">Masukkan nomor tiket yang Anda terima saat mengirim pengaduan untuk melihat status dan tanggapan terbaru.</p>
