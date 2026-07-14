@@ -1,4 +1,7 @@
 <?php
+
+include 'koneksi.php';
+
 // ===== BERITA (paginasi) =====
 $per_page = 9;
 $halaman = isset($_GET['p']) ? max(1, (int) $_GET['p']) : 1;
@@ -21,7 +24,7 @@ $r_pengumuman = mysqli_query($conn, $q_pengumuman);
 
 <section class="section" style="padding-bottom:10px">
   <div class="section-inner">
-    <a href="?page=home" style="display:inline-flex;align-items:center;gap:6px;color:var(--navy);font-weight:600;font-size:14px;text-decoration:none;margin-bottom:20px">&larr; Kembali ke Beranda</a>
+    <a href="?page=home" class="btn-back">&larr; Kembali ke Beranda</a>
     <div class="section-label">Informasi Terkini</div>
     <div class="section-title">Berita &amp; Pengumuman</div>
     <p class="section-sub">Kumpulan berita dan pengumuman resmi Dinas Pendidikan Kabupaten Sumenep.</p>

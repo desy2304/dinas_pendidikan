@@ -33,7 +33,7 @@ $kategori_tampil = $filter !== '' ? [$filter => $kategori_label[$filter]] : $kat
 
 <section class="section" style="padding-bottom:10px">
   <div class="section-inner">
-    <a href="?page=home" style="display:inline-flex;align-items:center;gap:6px;color:var(--navy);font-weight:600;font-size:14px;text-decoration:none;margin-bottom:20px">&larr; Kembali ke Beranda</a>
+    <a href="?page=home" class="btn-back">&larr; Kembali ke Beranda</a>
     <div class="section-label">Akuntabilitas Kinerja</div>
     <div class="section-title">Sakip</div>
     <p class="section-sub">Sistem Akuntabilitas Kinerja Instansi Pemerintah (SAKIP) merupakan rangkaian sistematik dari perencanaan, pengukuran, pelaporan, dan evaluasi kinerja instansi pemerintah.</p>

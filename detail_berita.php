@@ -1,4 +1,7 @@
 <?php
+
+include 'koneksi.php';
+
 $id = isset($_GET['id']) ? (int) $_GET['id'] : 0;
 
 $berita = null;
@@ -11,7 +14,7 @@ if ($id > 0) {
 
 <section class="section" style="padding-bottom:10px">
   <div class="section-inner" style="max-width:820px">
-    <a href="?page=berita" style="display:inline-flex;align-items:center;gap:6px;color:var(--navy);font-weight:600;font-size:14px;text-decoration:none;margin-bottom:20px">&larr; Kembali ke Berita</a>
+    <a href="?page=berita" class="btn-back">&larr; Kembali ke Berita</a>
 
     <?php if (!$berita): ?>
       <div class="section-label">Berita</div>
