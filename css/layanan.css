@@ -1,5 +1,9 @@
 /* ── INFO GRID (Informasi Publik & Layanan Publik) ── */
-.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px
+}
 .info-card{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:28px;box-shadow:0 8px 24px rgba(11,31,58,.04)}
 .info-card-icon{width:48px;height:48px;border-radius:12px;background:var(--cream);display:flex;align-items:center;justify-content:center;margin-bottom:16px;color:var(--gold);font-size:22px}
 .info-card h4{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:8px}

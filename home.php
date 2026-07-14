@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/koneksi.php';
+
+include 'koneksi.php';
 
 // Ambil data profil (visi, misi)
 $query_profil = "SELECT visi, misi FROM profil LIMIT 1";
@@ -178,6 +179,7 @@ $result_pegawai = mysqli_query($conn, $query_pegawai);
         <div class="section-label">Pelayanan Publik</div>
         <div class="section-title">Layanan Kami</div>
       </div>
+      <a href="?page=layanan_publik" class="link-all">Lihat semua</a>
     </div>
     <div class="layanan-grid">
       <a href="?page=detail_layanan&slug=legalisir-ijazah" class="layanan-card reveal" style="text-decoration:none;color:inherit;display:block">

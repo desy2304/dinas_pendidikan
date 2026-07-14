@@ -11,7 +11,7 @@ $profil = $r_profil ? mysqli_fetch_assoc($r_profil) : null;
   <div class="section-inner">
     <a href="?page=home" class="btn-back">&larr; Kembali ke Profil</a>
     <div class="section-label">Lokasi</div>
-    <div class="section-title">Peta Sekolah</div>
+    <div class="section-title">Peta Disdik</div>
   </div>
 </section>
 
@@ -29,8 +29,5 @@ $profil = $r_profil ? mysqli_fetch_assoc($r_profil) : null;
         </div>
       <?php endif; ?>
     </div>
-    <p style="font-size:13px;color:var(--muted);margin-top:14px">
-      *Menampilkan lokasi Kantor Dinas Pendidikan Kabupaten Sumenep. Direktori peta satuan pendidikan menyusul.
-    </p>
   </div>
 </section>
