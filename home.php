@@ -278,7 +278,7 @@ $result_pegawai = mysqli_query($conn, $query_pegawai);
         <div class="section-label">Sumber Daya Manusia</div>
         <div class="section-title">Pimpinan &amp; Staff</div>
       </div>
-      <a href="?page=pegawai" class="link-all">Lihat semua pegawai</a>
+      <a href="?page=profil_karyawan" class="link-all">Lihat semua pegawai</a>
     </div>
     <div class="pegawai-grid">
       <?php if (mysqli_num_rows($result_pegawai) > 0): ?>

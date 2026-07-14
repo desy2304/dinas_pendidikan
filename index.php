@@ -83,7 +83,6 @@ if (!file_exists($file)) {
         <a href="#" class="drop-toggle">Informasi &amp; Layanan</a>
         <div class="dropdown-menu">
           <a href="?page=layanan_publik">Layanan Publik</a>
-          <a href="?page=layanan_panduan">Panduan &amp; Formulir</a>
           <a href="?page=layanan_sakip">Sakip</a>
           <a href="?page=layanan_faq">FAQ</a>
         </div>
