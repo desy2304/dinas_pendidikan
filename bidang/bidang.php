@@ -470,7 +470,7 @@ $icons = ['fa-sitemap','fa-child','fa-user-graduate','fa-laptop-code','fa-coins'
             <div class="modal-body">Apakah Anda yakin ingin keluar dari sistem?</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                <a class="btn btn-primary" href="../login/login.php">Logout</a>
+                <a class="btn btn-primary" href="../login/logout.php">Logout</a>
             </div>
         </div>
     </div>

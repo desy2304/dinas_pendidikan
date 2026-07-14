@@ -1,5 +1,4 @@
 ﻿<?php
-session_start();
 include_once '../koneksi.php';
 
 function checkLogin($data, &$errors)
