@@ -31,7 +31,7 @@ if (
 }
 
 // ==== Upload file PDF (wajib) ====
-$folderUpload     = 'files/sakip/';
+$folderUpload     = '../uploads/sakip';
 $folderUploadPath = __DIR__ . '/../' . $folderUpload;
 if (!is_dir($folderUploadPath)) {
     mkdir($folderUploadPath, 0755, true);

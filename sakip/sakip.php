@@ -103,16 +103,24 @@ if ($r = mysqli_query($koneksi, "SELECT DISTINCT tahun FROM sakip ORDER BY tahun
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <style>
         :root {
-            --navy: #0B1F3A; --navy-mid: #162F55; --navy-light: #1E3F70;
-            --gold: #C89B3C; --gold-light: #E8BF6A; --cream: #F7F4EE;
+            --navy: #0B1F3A; 
+            --navy-mid: #162F55; 
+            --navy-light: #1E3F70;
+            --gold: #C89B3C; 
+            --gold-light: #E8BF6A; 
+            --cream: #F7F4EE;
         }
 
         a:not(.btn):not(.page-link):not(.dataTables_wrapper .dataTables_paginate a),
-        .text-primary { color: inherit !important; }
+        .text-primary { 
+            color: inherit !important; 
+        }
 
         .sidebar .nav-link, .sidebar .collapse-item,
         .sidebar .sidebar-brand, .sidebar .sidebar-heading,
-        .sidebar .nav-link span { color: white !important; }
+        .sidebar .nav-link span { 
+            color: white !important; 
+        }
 
         .bg-gradient-primary, .btn-primary,
         .sidebar .nav-item.active .nav-link,
@@ -122,12 +130,23 @@ if ($r = mysqli_query($koneksi, "SELECT DISTINCT tahun FROM sakip ORDER BY tahun
             border-color: #162F55 !important;
             background-image: none !important;
         }
-        .btn-primary:hover { background-color: #0B1F3A !important; }
+
+        .btn-primary:hover { 
+            background-color: #0B1F3A !important; 
+        }
 
         #tambahSakipModal .modal-header,
-        #editSakipModal .modal-header { background-color: #162F55; color: #fff; }
+        #editSakipModal .modal-header {
+            background-color: #162F55; 
+            color: #fff; 
+        }
+
         #tambahSakipModal .modal-header .close,
-        #editSakipModal .modal-header .close { color: #fff; opacity: .85; text-shadow: none; }
+        #editSakipModal .modal-header .close { 
+            color: #fff; 
+            opacity: .85; 
+            text-shadow: none; 
+        }
 
         .filter-bar {
             background: #f0f4fa;
@@ -136,24 +155,56 @@ if ($r = mysqli_query($koneksi, "SELECT DISTINCT tahun FROM sakip ORDER BY tahun
             padding: 14px 18px;
             margin-bottom: 18px;
         }
-        .filter-bar label { font-size: .78rem; font-weight: 700; color: #0B1F3A; margin-bottom: 4px; }
-        .filter-bar .form-control { font-size: .85rem; border-color: #b8c8df; }
-        .filter-bar .form-control:focus { border-color: #162F55; box-shadow: 0 0 0 .15rem rgba(22,47,85,.15); }
 
-        .jumlah-hasil { font-size: .82rem; color: #6B7280; }
+        .filter-bar label { 
+            font-size: .78rem; 
+            font-weight: 700; 
+            color: #0B1F3A; 
+            margin-bottom: 4px; 
+        }
+
+        .filter-bar .form-control {
+            font-size: .85rem; 
+            border-color: #b8c8df; 
+        }
+
+        .filter-bar .form-control:focus { 
+            border-color: #162F55; 
+            box-shadow: 0 0 0 .15rem rgba(22,47,85,.15); 
+        }
+
+        .jumlah-hasil { 
+            font-size: .82rem; 
+            color: #6B7280; 
+        }
 
         .file-icon-pdf {
             color: #c0392b; font-size: 1.3rem;
         }
-        .btn-unduh {
-            display: inline-flex; align-items: center; gap: 6px;
-            font-size: .8rem; font-weight: 600;
-            color: #162F55 !important; text-decoration: none;
-        }
-        .btn-unduh:hover { text-decoration: underline; }
 
-        .pagination .page-link { color: #162F55; }
-        .pagination .page-item.active .page-link { background-color: #162F55; border-color: #162F55; color: #fff; }
+        .btn-unduh {
+            display: inline-flex; 
+            align-items: center; 
+            gap: 6px;
+            font-size: .8rem; 
+            font-weight: 600;
+            color: #162F55 !important; 
+            text-decoration: none;
+        }
+
+        .btn-unduh:hover { 
+            text-decoration: underline; 
+        }
+
+        .pagination .page-link { 
+            color: #162F55; 
+        }
+
+        .pagination .page-item.active .page-link { 
+            background-color: #162F55; 
+            border-color: #162F55; 
+            color: #fff; 
+        }
     </style>
 </head>
 <body id="page-top">
@@ -170,13 +221,34 @@ if ($r = mysqli_query($koneksi, "SELECT DISTINCT tahun FROM sakip ORDER BY tahun
                 <div style="font-size:.5rem;"><i>Kabupaten Sumenep</i></div>
             </div>
         </a>
+
         <hr class="sidebar-divider my-0">
-        <li class="nav-item"><a class="nav-link" href="../index.php"><i class="fas fa-fw fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="../berita/berita.php"><i class="fas fa-fw fa-newspaper"></i><span>Berita</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="../pengumuman/pengumuman.php"><i class="fas fa-fw fa-bullhorn"></i><span>Pengumuman</span></a></li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../index.php">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../berita/berita.php">
+                <i class="fas fa-fw fa-newspaper"></i>
+                <span>Berita</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../pengumuman/pengumuman.php">
+                <i class="fas fa-fw fa-bullhorn"></i>
+                <span>Pengumuman</span>
+            </a>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo">
-                <i class="fas fa-fw fa-images"></i><span>Galeri</span>
+                <i class="fas fa-fw fa-images"></i>
+                <span>Galeri</span>
             </a>
             <div id="collapseTwo" class="collapse" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -185,19 +257,48 @@ if ($r = mysqli_query($koneksi, "SELECT DISTINCT tahun FROM sakip ORDER BY tahun
                 </div>
             </div>
         </li>
-        <li class="nav-item"><a class="nav-link" href="../pengaduan/pengaduan.php"><i class="fas fa-fw fa-exclamation-triangle"></i><span>Pengaduan</span></a></li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../pengaduan/pengaduan.php">
+                <i class="fas fa-fw fa-exclamation-triangle"></i>
+                <span>Pengaduan</span>
+            </a>
+        </li>
+
         <!-- Nav Item - Sakip -->
         <li class="nav-item active">
             <a class="nav-link" href="../sakip/sakip.php">
                 <i class="fas fa-fw fa-file-contract"></i>
-                <span>Sakip</span></a>
+                <span>Sakip</span>
+            </a>
         </li>
+
         <hr class="sidebar-divider">
         <div class="sidebar-heading">Instansi</div>
-        <li class="nav-item"><a class="nav-link" href="../profil/profil.php"><i class="fas fa-fw fa-user"></i><span>Profil</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="../pegawai/pegawai.php"><i class="fas fa-fw fa-user-friends"></i><span>Pegawai</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="../bidang/bidang.php"><i class="fas fa-fw fa-building"></i><span>Bidang</span></a></li>
+        
+        <li class="nav-item">
+            <a class="nav-link" href="../profil/profil.php">
+                <i class="fas fa-fw fa-user"></i>
+                <span>Profil</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../pegawai/pegawai.php">
+                <i class="fas fa-fw fa-user-friends"></i>
+                <span>Pegawai</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../bidang/bidang.php">
+                <i class="fas fa-fw fa-building"></i>
+                <span>Bidang</span>
+            </a>
+        </li>
+
         <hr class="sidebar-divider d-none d-md-block">
+        
         <div class="text-center d-none d-md-inline">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>

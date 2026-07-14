@@ -8,7 +8,6 @@ if (!isset($_SESSION['user'])) {
 
 include __DIR__ . '/../koneksi.php';
 
-// ==== Label kategori & status sesuai ENUM di database ====
 $kategoriLabel = [
     'sarana_prasarana' => 'Sarana & Prasarana',
     'kepegawaian'      => 'Kepegawaian',
@@ -22,10 +21,7 @@ $statusInfo = [
     'ditutup'    => ['label' => 'Selesai',    'badge' => 'badge-success'],
 ];
 
-// ==================================================================
-// ==== FILTER PERIODE: Semua Waktu / Per Bulan / Per Hari ====
-// ==================================================================
-$filterMode = $_GET['filter'] ?? 'semua'; // semua | bulan | hari
+$filterMode = $_GET['filter'] ?? 'semua';
 if (!in_array($filterMode, ['semua', 'bulan', 'hari'], true)) {
     $filterMode = 'semua';
 }
@@ -33,7 +29,6 @@ if (!in_array($filterMode, ['semua', 'bulan', 'hari'], true)) {
 $filterBulanInput = $_GET['bulan'] ?? date('Y-m');
 $filterHariInput  = $_GET['tanggal'] ?? date('Y-m-d');
 
-// Klausa WHERE untuk masing-masing tabel (default: tanpa filter / semua waktu)
 $hariList  = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', "Jum'at", 'Sabtu'];
 $bulanList = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
@@ -65,7 +60,6 @@ if ($filterMode === 'bulan' && preg_match('/^\d{4}-\d{2}$/', $filterBulanInput))
     $filterMode = 'semua';
 }
 
-// ==== Statistik kartu (ikut menyesuaikan filter yang aktif) ====
 $jmlDiajukan = 0;
 if ($r = mysqli_query($koneksi, "SELECT COUNT(*) AS jml FROM pengaduan WHERE status = 'diajukan'")) {
     $jmlDiajukan = mysqli_fetch_assoc($r)['jml'];
@@ -92,7 +86,6 @@ $notifMsg = [
     'not_found'     => ['type' => 'danger',  'text' => 'Data pengaduan tidak ditemukan.',                     'icon' => 'fa-exclamation-circle'],
 ];
 
-// ==== Ambil semua tanggapan sekaligus, dikelompokkan per pengaduan_id ====
 $threadByPengaduan = [];
 $sqlThread = "SELECT t.pengaduan_id, t.isi, t.created_at, a.name AS admin_name
               FROM tanggapan_pengaduan t
@@ -122,24 +115,17 @@ if ($r = mysqli_query($koneksi, $sqlPengaduan)) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Pengaduan</title>
+    <title>Kelola Pengaduan - Disdik Sumenep</title>
 
-    <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
@@ -181,7 +167,6 @@ if ($r = mysqli_query($koneksi, $sqlPengaduan)) {
             background-image: none !important;
         }
 
-        /* ==== Modal Detail Pengaduan ==== */
         #detailPengaduanModal .modal-header {
             background-color: #162F55;
             color: #fff;
@@ -267,7 +252,6 @@ if ($r = mysqli_query($koneksi, $sqlPengaduan)) {
             font-style: italic;
         }
 
-        /* ==== Filter Periode ==== */
         .filter-periode-card .form-inline .form-control {
             min-width: 150px;
         }
@@ -653,16 +637,13 @@ if ($r = mysqli_query($koneksi, $sqlPengaduan)) {
                         </div>
                     </div>
                 </div>
-                <!-- /.container-fluid -->
-
             </div>
-            <!-- End of Main Content -->
 
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2020</span>
+                        <span>Copyright &copy; Dinas Pendidikan Kabupaten Sumenep 2026</span>
                     </div>
                 </div>
             </footer>
@@ -882,7 +863,6 @@ if ($r = mysqli_query($koneksi, $sqlPengaduan)) {
             $('#detailPengaduanModal').modal('show');
         }
 
-        // Notifikasi otomatis hilang setelah beberapa detik + bersihkan URL
         (function () {
             var alertBox = document.getElementById('notifAlert');
             if (alertBox) {
@@ -897,5 +877,4 @@ if ($r = mysqli_query($koneksi, $sqlPengaduan)) {
         })();
     </script>
 </body>
-
 </html>

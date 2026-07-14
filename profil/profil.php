@@ -259,13 +259,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['aksi']) && $_POST['ak
 
             <!-- Notifikasi -->
             <?php if ($notif === 'sukses'): ?>
-            <div class="alert alert-success alert-dismissible alert-notif shadow-sm mb-4">
+            <div id="notifAlert" class="alert alert-success alert-dismissible alert-notif shadow-sm mb-4">
                 <i class="fas fa-check-circle mr-2"></i>
                 Profil instansi berhasil disimpan.
                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
             </div>
             <?php elseif ($notif === 'gagal'): ?>
-            <div class="alert alert-danger alert-dismissible alert-notif shadow-sm mb-4">
+            <div id="notifAlert" class="alert alert-danger alert-dismissible alert-notif shadow-sm mb-4">
                 <i class="fas fa-exclamation-circle mr-2"></i>
                 Gagal menyimpan profil. Silakan coba lagi.
                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
@@ -487,5 +487,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['aksi']) && $_POST['ak
 <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="../js/sb-admin-2.min.js"></script>
+<script>
+    (function () {
+        var alertBox = document.getElementById('notifAlert');
+        if (alertBox) {
+            setTimeout(function () {
+                $(alertBox).alert('close');
+            }, 4000);
+        }
+        if (window.history.replaceState && window.location.search.indexOf('notif=') !== -1) {
+            var cleanUrl = window.location.pathname;
+            window.history.replaceState(null, '', cleanUrl);
+        }
+    })();
+</script>
 </body>
 </html>
