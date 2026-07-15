@@ -265,14 +265,6 @@ if ($r = mysqli_query($koneksi, "SELECT DISTINCT tahun FROM sakip ORDER BY tahun
             </a>
         </li>
 
-        <!-- Nav Item - Sakip -->
-        <li class="nav-item active">
-            <a class="nav-link" href="../sakip/sakip.php">
-                <i class="fas fa-fw fa-file-contract"></i>
-                <span>Sakip</span>
-            </a>
-        </li>
-
         <hr class="sidebar-divider">
         <div class="sidebar-heading">Instansi</div>
         
@@ -295,6 +287,20 @@ if ($r = mysqli_query($koneksi, "SELECT DISTINCT tahun FROM sakip ORDER BY tahun
                 <i class="fas fa-fw fa-building"></i>
                 <span>Bidang</span>
             </a>
+        </li>
+
+        <!-- Nav Item - Kegiatan -->
+        <li class="nav-item">
+            <a class="nav-link" href="../kegiatan/kegiatan.php">
+                <i class="fas fa-fw fa-calendar-check"></i>
+                <span>Kegiatan</span></a>
+        </li>
+
+        <!-- Nav Item - Sakip -->
+        <li class="nav-item active">
+            <a class="nav-link" href="../sakip/sakip.php">
+                <i class="fas fa-fw fa-file-contract"></i>
+                <span>SAKIP</span></a>
         </li>
 
         <hr class="sidebar-divider d-none d-md-block">

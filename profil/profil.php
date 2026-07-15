@@ -177,13 +177,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['aksi']) && $_POST['ak
             </a>
         </li>
 
-        <!-- Nav Item - Sakip -->
-        <li class="nav-item">
-            <a class="nav-link" href="../sakip/sakip.php">
-                <i class="fas fa-fw fa-file-contract"></i>
-                <span>Sakip</span></a>
-        </li>
-
         <hr class="sidebar-divider">
 
         <div class="sidebar-heading">Instansi</div>
@@ -207,6 +200,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['aksi']) && $_POST['ak
                 <i class="fas fa-fw fa-building"></i>
                 <span>Bidang</span>
             </a>
+        </li>
+
+        <!-- Nav Item - Kegiatan -->
+        <li class="nav-item">
+            <a class="nav-link" href="../kegiatan/kegiatan.php">
+                <i class="fas fa-fw fa-calendar-check"></i>
+                <span>Kegiatan</span></a>
+        </li>
+        <!-- Nav Item - Sakip -->
+        <li class="nav-item">
+            <a class="nav-link" href="../sakip/sakip.php">
+                <i class="fas fa-fw fa-file-contract"></i>
+                <span>SAKIP</span></a>
         </li>
 
         <hr class="sidebar-divider d-none d-md-block">
