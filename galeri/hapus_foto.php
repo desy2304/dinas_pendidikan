@@ -26,13 +26,13 @@ if (!$q || mysqli_num_rows($q) === 0) {
     header("Location: galeri_foto.php?notif=not_found");
     exit;
 }
+
 $row = mysqli_fetch_assoc($q);
-
-if (!empty($row['gambar']) && file_exists(__DIR__ . '/../' . $row['gambar'])) {
-    @unlink(__DIR__ . '/../' . $row['gambar']);
-}
-
+$pathGambar = __DIR__ . '/../img/galeri/' . $row['gambar'];
 if (mysqli_query($koneksi, "DELETE FROM galeri WHERE id = $id AND kategori = 'foto'")) {
+    if (!empty($row['gambar']) && file_exists($pathGambar)) {
+        unlink($pathGambar);
+    }
     header("Location: galeri_foto.php?notif=sukses_hapus");
 } else {
     header("Location: galeri_foto.php?notif=gagal_hapus");

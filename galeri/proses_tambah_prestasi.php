@@ -44,10 +44,10 @@ if (
     exit;
 }
 
-$namaFile   = 'prestasi_' . time() . '_' . rand(100, 999) . '.' . $ekstensi;
-$namaGambar = null;
+$namaFile = 'prestasifoto_' . time() . '_' . rand(100, 999) . '.' . $ekstensi;
+
 if (move_uploaded_file($_FILES['gambar']['tmp_name'], $folderUploadPath . $namaFile)) {
-    $namaGambar = $folderUpload . $namaFile;
+    $namaGambar = $namaFile; 
 } else {
     header("Location: galeri_prestasi.php?notif=gagal_simpan");
     exit;

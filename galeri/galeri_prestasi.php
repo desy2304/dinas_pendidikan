@@ -521,14 +521,14 @@ function formatTanggalIndo($tgl, $bulanIndo) {
                             <?php else: ?>
                             <?php foreach ($daftarPrestasi as $g):
                                 $tglTampil = formatTanggalIndo($g['tanggal'], $bulanIndo);
-                                $gambarAda = !empty($g['gambar']) && file_exists(__DIR__ . '/../' . $g['gambar']);
+                                $path = '../img/galeri/' . $g['gambar'];
+                                $gambarAda = !empty($g['gambar']) && file_exists(__DIR__ . '/../img/galeri/' . $g['gambar']);
                             ?>
                             <div class="gallery-item"
                                  data-title="<?= htmlspecialchars(strtolower($g['judul']), ENT_QUOTES) ?>"
                                  data-date="<?= htmlspecialchars(strtolower($tglTampil), ENT_QUOTES) ?>">
                                 <span class="prestasi-ribbon"><i class="fas fa-trophy"></i> Prestasi</span>
-                                <img src="<?= $gambarAda ? '../' . htmlspecialchars($g['gambar']) : '../uploads/galeri' ?>"
-                                     alt="<?= htmlspecialchars($g['judul']) ?>">
+                                <img src="<?= $gambarAda ? $path : '../img/undraw_posting_photo.svg' ?>" alt="<?= htmlspecialchars($g['judul']) ?>">
                                 <div class="gallery-item-info">
                                     <p class="gallery-item-title"><?= htmlspecialchars($g['judul']) ?></p>
                                     <p class="gallery-item-date"><?= $tglTampil ?></p>
@@ -542,7 +542,7 @@ function formatTanggalIndo($tgl, $bulanIndo) {
                                             data-judul="<?= htmlspecialchars($g['judul'], ENT_QUOTES) ?>"
                                             data-tanggal="<?= htmlspecialchars($g['tanggal']) ?>"
                                             data-keterangan="<?= htmlspecialchars($g['keterangan'] ?? '', ENT_QUOTES) ?>"
-                                            data-gambar="<?= $gambarAda ? htmlspecialchars('../' . $g['gambar']) : '' ?>">
+                                            data-gambar="<?= $gambarAda ? htmlspecialchars($path) : '' ?>">
                                             Edit
                                         </button>
                                         <form method="POST" action="hapus_prestasi.php" style="display:inline;"

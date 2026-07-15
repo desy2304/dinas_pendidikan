@@ -49,12 +49,12 @@ if (!empty($_FILES['gambar']['name']) && $_FILES['gambar']['error'] === UPLOAD_E
     $ekstensiValid = ['jpg', 'jpeg', 'png', 'webp'];
 
     if (in_array($ekstensi, $ekstensiValid) && $_FILES['gambar']['size'] <= 2 * 1024 * 1024) {
-        $namaFile = 'foto_' . time() . '_' . rand(100, 999) . '.' . $ekstensi;
+        $namaFile = 'galerifoto_' . time() . '_' . rand(100, 999) . '.' . $ekstensi;
         if (move_uploaded_file($_FILES['gambar']['tmp_name'], $folderUploadPath . $namaFile)) {
-            if (!empty($dataLama['gambar']) && file_exists(__DIR__ . '/../' . $dataLama['gambar'])) {
-                @unlink(__DIR__ . '/../' . $dataLama['gambar']);
+            if (!empty($dataLama['gambar']) && file_exists(__DIR__ . '/../img/galeri/' . $dataLama['gambar'])) {
+                @unlink(__DIR__ . '/../img/galeri/' . $dataLama['gambar']);
             }
-            $namaGambar = $folderUpload . $namaFile;
+            $namaGambar = $namaFile;
         }
     }
 }
