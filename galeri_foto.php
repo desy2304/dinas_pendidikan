@@ -33,7 +33,7 @@ $r = mysqli_query($conn, $q);
         <div class="galeri-full-item reveal" <?php if ($ada): ?>onclick="openLightbox('<?= htmlspecialchars($path) ?>')"<?php endif; ?>>
           <div class="galeri-full-thumb">
             <?php if ($ada): ?>
-              <img src="uploads/galeri/<?= htmlspecialchars($path) ?>" alt="<?= htmlspecialchars($row['judul']) ?>">
+              <img src="<?= htmlspecialchars($path) ?>" alt="<?= htmlspecialchars($row['judul']) ?>">
             <?php else: ?>
               <div class="galeri-full-fallback"><i class="bi bi-image"></i></div>
             <?php endif; ?>
