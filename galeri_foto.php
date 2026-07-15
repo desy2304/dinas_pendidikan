@@ -27,13 +27,13 @@ $r = mysqli_query($conn, $q);
     <div class="galeri-full-grid">
       <?php if ($r && mysqli_num_rows($r) > 0): ?>
         <?php while ($row = mysqli_fetch_assoc($r)):
-          $path = 'uploads/galeri/' . $row['gambar'];
+          $path = 'img/galeri/' . $row['gambar'];
           $ada = !empty($row['gambar']) && file_exists($path);
         ?>
         <div class="galeri-full-item reveal" <?php if ($ada): ?>onclick="openLightbox('<?= htmlspecialchars($path) ?>')"<?php endif; ?>>
           <div class="galeri-full-thumb">
             <?php if ($ada): ?>
-              <img src="<?= htmlspecialchars($path) ?>" alt="<?= htmlspecialchars($row['judul']) ?>">
+              <img src="img/galeri/<?= htmlspecialchars($path) ?>" alt="<?= htmlspecialchars($row['judul']) ?>">
             <?php else: ?>
               <div class="galeri-full-fallback"><i class="bi bi-image"></i></div>
             <?php endif; ?>

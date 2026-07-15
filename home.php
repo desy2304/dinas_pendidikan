@@ -127,7 +127,7 @@ $result_pegawai = mysqli_query($conn, $query_pegawai);
         <div class="featured-img reveal">
           <div class="news-badge">Terbaru</div>
           <?php 
-            $gambar_path = 'uploads/berita/' . $berita_utama['gambar'];
+            $gambar_path = 'img/berita/' . $berita_utama['gambar'];
             // Cek apakah ada gambar dan file benar-benar ada
             if (!empty($berita_utama['gambar']) && file_exists($gambar_path)): 
           ?>
@@ -256,8 +256,8 @@ $result_pegawai = mysqli_query($conn, $query_pegawai);
       <?php if (mysqli_num_rows($result_galeri) > 0): ?>
         <?php while ($row = mysqli_fetch_assoc($result_galeri)): ?>
         <div class="galeri-item reveal">
-          <?php if ($row['gambar'] && file_exists('uploads/galeri/' . $row['gambar'])): ?>
-            <div class="galeri-bg" style="background-image: url('uploads/galeri/<?= $row['gambar'] ?>'); background-size:cover; background-position:center;"></div>
+          <?php if ($row['gambar'] && file_exists('img/galeri/' . $row['gambar'])): ?>
+            <div class="galeri-bg" style="background-image: url('img/galeri/<?= $row['gambar'] ?>'); background-size:cover; background-position:center;"></div>
           <?php else: ?>
             <div class="galeri-bg" style="background: linear-gradient(135deg, #1a3a5c, #2a5f7a);"></div>
           <?php endif; ?>
@@ -288,8 +288,8 @@ $result_pegawai = mysqli_query($conn, $query_pegawai);
         <div class="pegawai-card reveal">
           <div class="pegawai-avatar">
             <div class="pegawai-avatar-circle">
-              <?php if ($row['foto'] && file_exists('uploads/pegawai/' . $row['foto'])): ?>
-                <img src="uploads/pegawai/<?= htmlspecialchars($row['foto']) ?>" alt="Foto" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">
+              <?php if ($row['foto'] && file_exists('img/pegawai/' . $row['foto'])): ?>
+                <img src="img/pegawai/<?= htmlspecialchars($row['foto']) ?>" alt="Foto" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">
               <?php else: ?>
                 <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
               <?php endif; ?>
