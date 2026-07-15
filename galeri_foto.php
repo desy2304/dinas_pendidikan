@@ -26,14 +26,11 @@ $r = mysqli_query($conn, $q);
   <div class="section-inner">
     <div class="galeri-full-grid">
       <?php if ($r && mysqli_num_rows($r) > 0): ?>
-        <?php while ($row = mysqli_fetch_assoc($r)):
-          $path = 'uploads/galeri/' . $row['gambar'];
-          $ada = !empty($row['gambar']) && file_exists($path);
-        ?>
-        <div class="galeri-full-item reveal" <?php if ($ada): ?>onclick="openLightbox('<?= htmlspecialchars($path) ?>')"<?php endif; ?>>
+        <?php while ($row = mysqli_fetch_assoc($r)): ?>
+        <div class="galeri-full-item reveal" <?php if (!empty($row['gambar']) && file_exists('img/galeri/' . $row['gambar'])): ?>onclick="openLightbox('img/galeri/<?= htmlspecialchars($row['gambar']) ?>')"<?php endif; ?>>
           <div class="galeri-full-thumb">
-            <?php if ($ada): ?>
-              <img src="<?= htmlspecialchars($path) ?>" alt="<?= htmlspecialchars($row['judul']) ?>">
+            <?php if (!empty($row['gambar']) && file_exists('img/galeri/' . $row['gambar'])): ?>
+              <img src="img/galeri/<?= htmlspecialchars($row['gambar']) ?>" alt="<?= htmlspecialchars($row['judul']) ?>">
             <?php else: ?>
               <div class="galeri-full-fallback"><i class="bi bi-image"></i></div>
             <?php endif; ?>

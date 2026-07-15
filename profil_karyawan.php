@@ -44,7 +44,6 @@ function inisial_nama(string $nama) {
 
 <section class="section section-alt" style="padding-top:20px">
   <div class="section-inner">
-
     <div class="bidang-filter">
       <a href="?page=profil_karyawan" class="bidang-filter-btn <?= $bidang_id === 0 ? 'active' : '' ?>">Semua Bidang</a>
       <?php while ($b = mysqli_fetch_assoc($r_bidang_filter)): ?>
@@ -59,8 +58,8 @@ function inisial_nama(string $nama) {
         <?php while ($row = mysqli_fetch_assoc($r_pegawai)): ?>
         <div class="karyawan-card reveal">
           <div class="karyawan-avatar">
-            <?php if (!empty($row['foto']) && file_exists('uploads/pegawai/' . $row['foto'])): ?>
-              <img src="uploads/pegawai/<?= htmlspecialchars($row['foto']) ?>" alt="<?= htmlspecialchars($row['nama']) ?>">
+            <?php if (!empty($row['foto']) && file_exists('img/pegawai/' . $row['foto'])): ?>
+              <img src="img/pegawai/<?= htmlspecialchars($row['foto']) ?>" alt="<?= htmlspecialchars($row['nama']) ?>">
             <?php else: ?>
               <div class="karyawan-avatar-fallback"><?= inisial_nama($row['nama']) ?></div>
             <?php endif; ?>

@@ -256,8 +256,8 @@ $result_pegawai = mysqli_query($conn, $query_pegawai);
       <?php if (mysqli_num_rows($result_galeri) > 0): ?>
         <?php while ($row = mysqli_fetch_assoc($result_galeri)): ?>
         <div class="galeri-item reveal">
-          <?php if ($row['gambar'] && file_exists('uploads/galeri/' . $row['gambar'])): ?>
-            <div class="galeri-bg" style="background-image: url('uploads/galeri/<?= $row['gambar'] ?>'); background-size:cover; background-position:center;"></div>
+          <?php if ($row['gambar'] && file_exists('img/galeri/' . $row['gambar'])): ?>
+            <div class="galeri-bg" style="background-image: url('img/galeri/<?= $row['gambar'] ?>'); background-size:cover; background-position:center;"></div>
           <?php else: ?>
             <div class="galeri-bg" style="background: linear-gradient(135deg, #1a3a5c, #2a5f7a);"></div>
           <?php endif; ?>
