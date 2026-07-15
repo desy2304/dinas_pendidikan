@@ -502,8 +502,8 @@ if ($r = mysqli_query($koneksi, $sql)) {
                                         <td class="text-center align-middle text-muted small"><?= $i + 1 ?></td>
                                         <td class="text-center align-middle">
                                             <?php if (!empty($row['gambar']) && file_exists(__DIR__ . '/../img/pengumuman/' . $row['gambar'])): ?>
-                                                <img src="../uploads/pengumuman/<?= htmlspecialchars($row['gambar']) ?>"
-                                                     alt="Gambar" class="img-thumb">
+                                                <img src="../img/pengumuman/<?= htmlspecialchars($row['gambar']) ?>"
+                                                    alt="Gambar" class="img-thumb">
                                             <?php else: ?>
                                                 <div class="img-thumb-placeholder mx-auto">
                                                     <i class="fas fa-image"></i>
@@ -783,7 +783,7 @@ if ($r = mysqli_query($koneksi, $sql)) {
             const gambarPreview   = document.getElementById('previewGambarEdit');
             if (gambar) {
                 gambarContainer.style.display = 'block';
-                gambarPreview.src = '../uploads/pengumuman/' + gambar;
+                gambarPreview.src = '../img/pengumuman/' + gambar;
             } else {
                 gambarContainer.style.display = 'none';
             }
