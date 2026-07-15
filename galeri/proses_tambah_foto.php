@@ -27,9 +27,8 @@ if ($judul === '' || $tanggal === '' || empty($_FILES['gambar']['name'])) {
 }
 
 // ==== Upload gambar (wajib) ====
-
-$folderUpload     = null;
-$folderUploadPath = __DIR__ . '/../img/galeri' . $folderUpload;
+$folderUpload = 'img/galeri/';
+$folderUploadPath = __DIR__ . '/../' . $folderUpload;
 
 if (!is_dir($folderUploadPath)) {
     mkdir($folderUploadPath, 0755, true);
@@ -47,10 +46,9 @@ if (
     exit;
 }
 
-$namaFile   = 'foto_' . time() . '_' . rand(100, 999) . '.' . $ekstensi;
-$namaGambar = null;
+$namaFile = 'galerifoto_' . time() . '_' . rand(100, 999) . '.' . $ekstensi;
 if (move_uploaded_file($_FILES['gambar']['tmp_name'], $folderUploadPath . $namaFile)) {
-    $namaGambar = $folderUpload . $namaFile;
+    $namaGambar = $namaFile;   // hanya simpan nama file di database
 } else {
     header("Location: galeri_foto.php?notif=gagal_simpan");
     exit;
