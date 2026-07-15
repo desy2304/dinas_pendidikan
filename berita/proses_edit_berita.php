@@ -36,26 +36,27 @@ if (!$q || mysqli_num_rows($q) === 0) {
 }
 $dataLama = mysqli_fetch_assoc($q);
 
-// ==== Upload gambar baru (opsional, replace gambar lama jika ada) ====
-$namaGambar = $dataLama['gambar']; // default: pakai gambar lama
+// ==== Upload gambar baru (opsional) ====
+$namaGambar = $dataLama['gambar'];
 if (!empty($_FILES['gambar']['name']) && $_FILES['gambar']['error'] === UPLOAD_ERR_OK) {
     $folderUpload = 'img/berita/';
     $folderUploadPath = __DIR__ . '/../' . $folderUpload;
     if (!is_dir($folderUploadPath)) {
         mkdir($folderUploadPath, 0755, true);
     }
-
-    $ekstensi      = strtolower(pathinfo($_FILES['gambar']['name'], PATHINFO_EXTENSION));
+    $ekstensi = strtolower(pathinfo($_FILES['gambar']['name'], PATHINFO_EXTENSION));
     $ekstensiValid = ['jpg', 'jpeg', 'png', 'webp'];
-
     if (in_array($ekstensi, $ekstensiValid) && $_FILES['gambar']['size'] <= 2 * 1024 * 1024) {
-        $namaFile = 'berita_' . time() . '_' . rand(100, 999) . '.' . $ekstensi;
+        $namaFile = 'berita_' . time() . '_' . rand(100,999) . '.' . $ekstensi;
         if (move_uploaded_file($_FILES['gambar']['tmp_name'], $folderUploadPath . $namaFile)) {
-            // Hapus gambar lama supaya tidak menumpuk file yatim
-            if (!empty($dataLama['gambar']) && file_exists(__DIR__ . '/../' . $dataLama['gambar'])) {
-                @unlink(__DIR__ . '/../' . $dataLama['gambar']);
+            // hapus gambar lama
+            if (!empty($dataLama['gambar'])) {
+                $gambarLama = __DIR__ . '/../img/berita/' . $dataLama['gambar'];
+                if (file_exists($gambarLama)) {
+                    unlink($gambarLama);
+                }
             }
-            $namaGambar = $folderUpload . $namaFile;
+            $namaGambar = $namaFile;
         }
     }
 }

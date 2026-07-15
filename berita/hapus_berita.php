@@ -24,8 +24,9 @@ if ($id <= 0) {
 // Hapus file gambar fisik jika ada
 $q = mysqli_query($koneksi, "SELECT gambar FROM berita WHERE id = $id LIMIT 1");
 if ($q && $row = mysqli_fetch_assoc($q)) {
-    if (!empty($row['gambar']) && file_exists(__DIR__ . '/../' . $row['gambar'])) {
-        @unlink(__DIR__ . '/../' . $row['gambar']);
+    $pathGambar = __DIR__ . '/../img/berita/' . $row['gambar'];
+    if (!empty($row['gambar']) && file_exists($pathGambar)) {
+        unlink($pathGambar);
     }
 } else {
     header("Location: berita.php?notif=not_found");

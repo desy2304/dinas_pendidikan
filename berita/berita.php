@@ -517,10 +517,14 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
                                                 <?php foreach ($daftarBerita as $b) : ?>
                                                     <tr>
                                                         <td>
-                                                            <?php if (!empty($b['gambar']) && file_exists(__DIR__ . '/../' . $b['gambar'])) : ?>
-                                                                <img class="berita-thumb" src="../<?= htmlspecialchars($b['gambar']) ?>" alt="">
+                                                            <?php if (!empty($b['gambar']) && file_exists(__DIR__ . '/../img/berita/' . $b['gambar'])) : ?>
+                                                                <img class="berita-thumb"
+                                                                     src="../img/berita/<?= htmlspecialchars($b['gambar']) ?>"
+                                                                     alt="">
                                                             <?php else : ?>
-                                                                <img class="berita-thumb" src="../img/undraw_posting_photo.svg" alt="">
+                                                                <img class="berita-thumb"
+                                                                     src="../img/undraw_posting_photo.svg"
+                                                                     alt="">
                                                             <?php endif; ?>
                                                         </td>
                                                         <td>
@@ -663,9 +667,9 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
     <div class="modal fade" id="editBeritaModal" tabindex="-1" role="dialog" aria-labelledby="editBeritaModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header btn-primary">
                     <h5 class="modal-title" id="editBeritaModalLabel">Edit Berita</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close" style="color: white;">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>

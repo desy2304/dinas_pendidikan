@@ -62,7 +62,7 @@ if (!empty($_FILES['gambar']['name']) && $_FILES['gambar']['error'] === UPLOAD_E
     if (in_array($ekstensi, $ekstensiValid) && $_FILES['gambar']['size'] <= 2 * 1024 * 1024) {
         $namaFile = 'berita_' . time() . '_' . rand(100, 999) . '.' . $ekstensi;
         if (move_uploaded_file($_FILES['gambar']['tmp_name'], $folderUploadPath . $namaFile)) {
-            $namaGambar = $folderUpload . $namaFile;
+            $namaGambar = $namaFile; // simpan nama file saja
         }
     }
 }
@@ -72,7 +72,7 @@ $judulEsc = mysqli_real_escape_string($koneksi, $judul);
 $isiEsc   = mysqli_real_escape_string($koneksi, $isi);
 $slugEsc  = mysqli_real_escape_string($koneksi, $slug);
 
-$gambarVal    = $namaGambar ? "'" . mysqli_real_escape_string($koneksi, $namaGambar) . "'" : "NULL";
+$gambarVal = $namaGambar ? "'" . mysqli_real_escape_string($koneksi, $namaGambar) . "'" : "NULL";
 $kategoriVal  = $kategoriId ? $kategoriId : "NULL";
 $adminVal     = $adminId ? $adminId : "NULL";
 $tanggalPublish = ($status === 'terbit') ? "'" . date('Y-m-d') . "'" : "NULL";
