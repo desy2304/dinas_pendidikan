@@ -28,7 +28,7 @@ if ($judul === '' || $tanggal === '' || empty($_FILES['gambar']['name'])) {
 
 // ==== Upload gambar (wajib) ====
 $folderUpload     = null;
-$folderUploadPath = __DIR__ . '/../' . $folderUpload;
+$folderUploadPath = __DIR__ . '/../img/galeri' . $folderUpload;
 if (!is_dir($folderUploadPath)) {
     mkdir($folderUploadPath, 0755, true);
 }
