@@ -431,7 +431,7 @@ function formatTanggalIndo($tgl, $bulanIndo) {
                         </div>
                     </div>
                     <div class="col-xl-6 col-md-6 mb-4">
-                        <div class="card border-left-warning shadow h-100 py-2">
+                        <div class="card border-left-success shadow h-100 py-2">
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
@@ -545,11 +545,12 @@ function formatTanggalIndo($tgl, $bulanIndo) {
                                             data-gambar="<?= $gambarAda ? htmlspecialchars($path) : '' ?>">
                                             Edit
                                         </button>
-                                        <form method="POST" action="hapus_prestasi.php" style="display:inline;"
-                                            onsubmit="return confirm('Yakin ingin menghapus prestasi \'<?= htmlspecialchars(addslashes($g['judul'])) ?>\'?');">
-                                            <input type="hidden" name="id" value="<?= (int)$g['id'] ?>">
-                                            <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
-                                        </form>
+                                        <button type="button"
+                                            class="btn btn-sm btn-danger btn-hapus"
+                                            data-id="<?= (int)$g['id'] ?>"
+                                            data-judul="<?= htmlspecialchars($g['judul'], ENT_QUOTES) ?>">
+                                            Hapus
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -681,6 +682,34 @@ function formatTanggalIndo($tgl, $bulanIndo) {
         </div>
     </div>
 
+    <!-- Modal Hapus Foto -->
+    <div class="modal fade" id="modalHapus" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background:#e74a3b;">
+                    <h5 class="modal-title text-white"><i class="fas fa-trash mr-2"></i>Hapus Foto</h5>
+                    <button class="close text-white" type="button" data-dismiss="modal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                    <p>Yakin ingin menghapus foto:</p>
+                    <p class="font-weight-bold" id="hapusJudul"></p>
+                    <p class="text-muted small">Tindakan ini tidak bisa dibatalkan.</p>
+                </div>
+                <div class="modal-footer">
+                    <form action="hapus_foto.php" method="POST">
+                        <input type="hidden" name="aksi" value="hapus">
+                        <input type="hidden" name="id" id="hapusId">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash mr-1"></i>Hapus
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Logout Modal -->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -730,6 +759,14 @@ function formatTanggalIndo($tgl, $bulanIndo) {
             window.history.replaceState(null, '', window.location.pathname);
         }
     })();
+
+    document.querySelectorAll('.btn-hapus').forEach(function(btn){
+        btn.addEventListener('click', function(){
+            document.getElementById('hapusId').value = this.dataset.id;
+            document.getElementById('hapusJudul').textContent = this.dataset.judul;
+            $('#modalHapus').modal('show');
+        });
+    });
     </script>
 
 </body>

@@ -162,13 +162,34 @@ function formatTanggalIndo($tgl, $bulanIndo) {
                 <div style="font-size:.5rem;"><i>Kabupaten Sumenep</i></div>
             </div>
         </a>
+
         <hr class="sidebar-divider my-0">
-        <li class="nav-item"><a class="nav-link" href="../index.php"><i class="fas fa-fw fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="../berita/berita.php"><i class="fas fa-fw fa-newspaper"></i><span>Berita</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="../pengumuman/pengumuman.php"><i class="fas fa-fw fa-bullhorn"></i><span>Pengumuman</span></a></li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../index.php">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../berita/berita.php">
+                <i class="fas fa-fw fa-newspaper"></i>
+                <span>Berita</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../pengumuman/pengumuman.php">
+                <i class="fas fa-fw fa-bullhorn"></i>
+                <span>Pengumuman</span>
+            </a>
+        </li>
+
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo">
-                <i class="fas fa-fw fa-images"></i><span>Galeri</span>
+                <i class="fas fa-fw fa-images"></i>
+                <span>Galeri</span>
             </a>
             <div id="collapseTwo" class="collapse" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
@@ -178,14 +199,52 @@ function formatTanggalIndo($tgl, $bulanIndo) {
                 </div>
             </div>
         </li>
-        <li class="nav-item"><a class="nav-link" href="../pengaduan/pengaduan.php"><i class="fas fa-fw fa-exclamation-triangle"></i><span>Pengaduan</span></a></li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../pengaduan/pengaduan.php">
+                <i class="fas fa-fw fa-exclamation-triangle"></i>
+                <span>Pengaduan</span>
+            </a>
+        </li>
+
         <hr class="sidebar-divider">
+
         <div class="sidebar-heading">Instansi</div>
-        <li class="nav-item"><a class="nav-link" href="../profil/profil.php"><i class="fas fa-fw fa-user"></i><span>Profil</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="../pegawai/pegawai.php"><i class="fas fa-fw fa-user-friends"></i><span>Pegawai</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="../bidang/bidang.php"><i class="fas fa-fw fa-building"></i><span>Bidang</span></a></li>
-        <li class="nav-item active"><a class="nav-link active" href="../kegiatan/kegiatan.php"><i class="fas fa-fw fa-calendar-check"></i><span>Kegiatan</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="../sakip/sakip.php"><i class="fas fa-fw fa-file-contract"></i><span>SAKIP</span></a></li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../profil/profil.php">
+                <i class="fas fa-fw fa-user"></i>
+                <span>Profil</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../pegawai/pegawai.php">
+                <i class="fas fa-fw fa-user-friends"></i>
+                <span>Pegawai</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../bidang/bidang.php">
+                <i class="fas fa-fw fa-building"></i>
+                <span>Bidang</span>
+            </a>
+        </li>
+
+        <li class="nav-item active">
+            <a class="nav-link active" href="../kegiatan/kegiatan.php">
+                <i class="fas fa-fw fa-calendar-check"></i>
+                <span>Kegiatan</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../sakip/sakip.php">
+                <i class="fas fa-fw fa-file-contract"></i>
+                <span>SAKIP</span>
+            </a>
+        </li>
     </ul>
 
     <div id="content-wrapper" class="d-flex flex-column">
@@ -240,7 +299,7 @@ function formatTanggalIndo($tgl, $bulanIndo) {
 
             <!-- Stat Cards -->
             <div class="row">
-                <div class="col-xl-3 col-md-6 mb-4">
+                <div class="col-xl-4 col-md-6 mb-4">
                     <div class="card border-left-primary shadow h-100 py-2">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
@@ -253,21 +312,8 @@ function formatTanggalIndo($tgl, $bulanIndo) {
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-6 mb-4">
+                <div class="col-xl-4 col-md-6 mb-4">
                     <div class="card border-left-success shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Sedang Berlangsung</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $totalBerlangsung ?></div>
-                                </div>
-                                <div class="col-auto"><i class="fas fa-play-circle fa-2x text-gray-300"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-left-primary shadow h-100 py-2">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
@@ -279,7 +325,7 @@ function formatTanggalIndo($tgl, $bulanIndo) {
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-6 mb-4">
+                <div class="col-xl-4 col-md-6 mb-4">
                     <div class="card border-left-warning shadow h-100 py-2">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">

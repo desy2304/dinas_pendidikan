@@ -87,7 +87,6 @@ $icons = ['fa-sitemap','fa-child','fa-user-graduate','fa-laptop-code','fa-coins'
             border-color: #162F55 !important;
             background-image: none !important;
         }
-        .btn-primary:hover { background-color: #8a1535 !important; }
 
         /* Card Bidang */
         .bidang-card { border:1px solid #eee0e3; border-radius:.5rem; margin-bottom:18px; overflow:hidden; }
@@ -108,12 +107,6 @@ $icons = ['fa-sitemap','fa-child','fa-user-graduate','fa-laptop-code','fa-coins'
         .modal-header-merah { background:#162F55; }
         .modal-header-merah .modal-title,
         .modal-header-merah .close { color:#fff; text-shadow:none; opacity:1; }
-
-        .alert-notif { border-radius:8px; border:none; }
-
-        /* Stat border */
-        .bl-merah  { border-left:4px solid #162F55 !important; }
-        .bl-kuning { border-left:4px solid #f6c23e !important; }
     </style>
 </head>
 <body id="page-top">
@@ -130,10 +123,30 @@ $icons = ['fa-sitemap','fa-child','fa-user-graduate','fa-laptop-code','fa-coins'
                 <div style="font-size:.5rem;"><i>Kabupaten Sumenep</i></div>
             </div>
         </a>
+
         <hr class="sidebar-divider my-0">
-        <li class="nav-item"><a class="nav-link" href="../index.php"><i class="fas fa-fw fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="../berita/berita.php"><i class="fas fa-fw fa-newspaper"></i><span>Berita</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="../pengumuman/pengumuman.php"><i class="fas fa-fw fa-bullhorn"></i><span>Pengumuman</span></a></li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../index.php">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../berita/berita.php">
+                <i class="fas fa-fw fa-newspaper"></i>
+                <span>Berita</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../pengumuman/pengumuman.php">
+                <i class="fas fa-fw fa-bullhorn"></i>
+                <span>Pengumuman</span>
+            </a>
+        </li>
+
         <!-- Nav Item - Galeri -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
@@ -148,13 +161,38 @@ $icons = ['fa-sitemap','fa-child','fa-user-graduate','fa-laptop-code','fa-coins'
                 </div>
             </div>
         </li>
-        <li class="nav-item"><a class="nav-link" href="../pengaduan/pengaduan.php"><i class="fas fa-fw fa-exclamation-triangle"></i><span>Pengaduan</span></a></li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../pengaduan/pengaduan.php">
+                <i class="fas fa-fw fa-exclamation-triangle"></i>
+                <span>Pengaduan</span>
+            </a>
+        </li>
 
         <hr class="sidebar-divider">
+
         <div class="sidebar-heading">Instansi</div>
-        <li class="nav-item"><a class="nav-link" href="../profil/profil.php"><i class="fas fa-fw fa-user"></i><span>Profil</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="../pegawai/pegawai.php"><i class="fas fa-fw fa-user-friends"></i><span>Pegawai</span></a></li>
-        <li class="nav-item active"><a class="nav-link" href="../bidang/bidang.php"><i class="fas fa-fw fa-building"></i><span>Bidang</span></a></li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../profil/profil.php">
+                <i class="fas fa-fw fa-user"></i>
+                <span>Profil</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="../pegawai/pegawai.php">
+                <i class="fas fa-fw fa-user-friends"></i>
+                <span>Pegawai</span>
+            </a>
+        </li>
+
+        <li class="nav-item active">
+            <a class="nav-link" href="../bidang/bidang.php">
+                <i class="fas fa-fw fa-building"></i>
+                <span>Bidang</span>
+            </a>
+        </li>
 
         <!-- Nav Item - Kegiatan -->
         <li class="nav-item">
@@ -171,6 +209,7 @@ $icons = ['fa-sitemap','fa-child','fa-user-graduate','fa-laptop-code','fa-coins'
         </li>
 
         <hr class="sidebar-divider d-none d-md-block">
+
         <div class="text-center d-none d-md-inline">
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
@@ -231,11 +270,11 @@ $icons = ['fa-sitemap','fa-child','fa-user-graduate','fa-laptop-code','fa-coins'
             <!-- Stat Cards -->
             <div class="row">
                 <div class="col-xl-4 col-md-6 mb-4">
-                    <div class="card bl-merah shadow h-100 py-2">
+                    <div class="card bl-merah shadow h-100 py-2 border-left-primary">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-uppercase mb-1" style="color:#162F55;">Total Bidang</div>
+                                    <div class="text-xs font-weight-bold text-dark text-uppercase mb-1">Total Bidang</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $totalBidang ?></div>
                                 </div>
                                 <div class="col-auto"><i class="fas fa-building fa-2x text-gray-300"></i></div>
@@ -244,11 +283,11 @@ $icons = ['fa-sitemap','fa-child','fa-user-graduate','fa-laptop-code','fa-coins'
                     </div>
                 </div>
                 <div class="col-xl-4 col-md-6 mb-4">
-                    <div class="card bl-merah shadow h-100 py-2">
+                    <div class="card bl-merah shadow h-100 py-2 border-left-success">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-uppercase mb-1" style="color:#162F55;">Total Pegawai Aktif</div>
+                                    <div class="text-xs font-weight-bold text-uppercase mb-1">Total Pegawai Aktif</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $totalPegawai ?></div>
                                 </div>
                                 <div class="col-auto"><i class="fas fa-user-friends fa-2x text-gray-300"></i></div>
@@ -257,11 +296,11 @@ $icons = ['fa-sitemap','fa-child','fa-user-graduate','fa-laptop-code','fa-coins'
                     </div>
                 </div>
                 <div class="col-xl-4 col-md-6 mb-4">
-                    <div class="card bl-kuning shadow h-100 py-2">
+                    <div class="card bl-kuning shadow h-100 py-2 border-left-primary">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Rata-rata Pegawai / Bidang</div>
+                                    <div class="text-xs font-weight-bold text-uppercase mb-1">Rata-rata Pegawai / Bidang</div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800"><?= $rataRata ?></div>
                                 </div>
                                 <div class="col-auto"><i class="fas fa-chart-pie fa-2x text-gray-300"></i></div>
@@ -321,7 +360,7 @@ $icons = ['fa-sitemap','fa-child','fa-user-graduate','fa-laptop-code','fa-coins'
                                 <?= !empty($b['fungsi']) ? nl2br(htmlspecialchars($b['fungsi'])) : '<span class="text-muted">Belum diisi</span>' ?>
                             </div>
                             <div class="bidang-actions">
-                                <button class="btn btn-sm btn-warning btn-edit"
+                                <button class="btn btn-sm btn-primary btn-edit"
                                     onclick="event.stopPropagation();"
                                     data-id="<?= $b['id'] ?>"
                                     data-nama="<?= htmlspecialchars($b['nama'], ENT_QUOTES) ?>"
@@ -369,7 +408,7 @@ $icons = ['fa-sitemap','fa-child','fa-user-graduate','fa-laptop-code','fa-coins'
         <div class="modal-content">
             <div class="modal-header modal-header-merah">
                 <h5 class="modal-title" id="labelTambah">
-                    <i class="fas fa-plus-circle mr-2"></i>Tambah Bidang
+                    Tambah Bidang
                 </h5>
                 <button class="close" type="button" data-dismiss="modal"><span>&times;</span></button>
             </div>
@@ -395,7 +434,7 @@ $icons = ['fa-sitemap','fa-child','fa-user-graduate','fa-laptop-code','fa-coins'
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save mr-1"></i>Simpan Bidang
+                        Simpan Bidang
                     </button>
                 </div>
             </form>
@@ -407,9 +446,9 @@ $icons = ['fa-sitemap','fa-child','fa-user-graduate','fa-laptop-code','fa-coins'
 <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="labelEdit" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header" style="background:#f6a000;">
+            <div class="modal-header" style="background:#162F55;">
                 <h5 class="modal-title text-white" id="labelEdit">
-                    <i class="fas fa-edit mr-2"></i>Edit Bidang
+                    Edit Bidang
                 </h5>
                 <button class="close text-white" type="button" data-dismiss="modal"><span>&times;</span></button>
             </div>
@@ -432,8 +471,8 @@ $icons = ['fa-sitemap','fa-child','fa-user-graduate','fa-laptop-code','fa-coins'
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-warning text-white">
-                        <i class="fas fa-save mr-1"></i>Simpan Perubahan
+                    <button type="submit" class="btn btn-primary text-white">
+                        Simpan Perubahan
                     </button>
                 </div>
             </form>

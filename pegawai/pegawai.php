@@ -304,15 +304,6 @@ if ($r = mysqli_query($koneksi, $sqlPegawai)) {
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                                <span class="badge badge-danger badge-counter">3+</span>
-                            </a>
-                        </li>
-
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
@@ -528,14 +519,12 @@ if ($r = mysqli_query($koneksi, $sqlPegawai)) {
                                                                 data-foto="<?= htmlspecialchars($fotoPath) ?>">
                                                                 <i class="fas fa-pen"></i>
                                                             </button>
-
-                                                            <form method="POST" action="hapus_pegawai.php" style="display:inline;"
-                                                                onsubmit="return confirm('Yakin ingin menghapus data pegawai \'<?= htmlspecialchars(addslashes($p['nama'])) ?>\'? Tindakan ini tidak bisa dibatalkan.');">
-                                                                <input type="hidden" name="id" value="<?= (int)$p['id'] ?>">
-                                                                <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
-                                                                    <i class="fas fa-trash"></i>
-                                                                </button>
-                                                            </form>
+                                                            <button type="button"
+                                                                class="btn btn-sm btn-danger btn-hapus"
+                                                                data-id="<?= (int)$p['id'] ?>"
+                                                                data-judul="<?= htmlspecialchars($p['nama'], ENT_QUOTES) ?>">
+                                                                Hapus
+                                                            </button>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>
@@ -658,6 +647,34 @@ if ($r = mysqli_query($koneksi, $sqlPegawai)) {
         </div>
     </div>
 
+    <!-- Modal Hapus Foto -->
+    <div class="modal fade" id="modalHapus" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="background:#e74a3b;">
+                    <h5 class="modal-title text-white"><i class="fas fa-trash mr-2"></i>Hapus Foto</h5>
+                    <button class="close text-white" type="button" data-dismiss="modal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+                    <p>Yakin ingin menghapus:</p>
+                    <p class="font-weight-bold" id="hapusJudul"></p>
+                    <p class="text-muted small">Tindakan ini tidak bisa dibatalkan.</p>
+                </div>
+                <div class="modal-footer">
+                    <form action="hapus_foto.php" method="POST">
+                        <input type="hidden" name="aksi" value="hapus">
+                        <input type="hidden" name="id" id="hapusId">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash mr-1"></i>Hapus
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -765,6 +782,14 @@ if ($r = mysqli_query($koneksi, $sqlPegawai)) {
                     var regex = '^' + $.fn.dataTable.util.escapeRegex(nilai) + '$';
                     table.column(3).search(regex, true, false).draw();
                 }
+            });
+        });
+
+        document.querySelectorAll('.btn-hapus').forEach(function(btn){
+            btn.addEventListener('click', function(){
+                document.getElementById('hapusId').value = this.dataset.id;
+                document.getElementById('hapusJudul').textContent = this.dataset.judul;
+                $('#modalHapus').modal('show');
             });
         });
     </script>

@@ -476,8 +476,8 @@ if ($r = mysqli_query($koneksi, $sql)) {
                                 data-search-label="Cari pengumuman:"
                                 data-length-label="Tampilkan _MENU_ data"
                                 data-info-label="Menampilkan _START_ sampai _END_ dari _TOTAL_ data"
-                                data-prev-label="Sebelumnya"
-                                data-next-label="Berikutnya">
+                                data-prev-label="Previous"
+                                data-next-label="Next">
                                 <thead class="thead-light">
                                     <tr>
                                         <th width="60">#</th>
@@ -577,7 +577,7 @@ if ($r = mysqli_query($koneksi, $sql)) {
             <div class="modal-content">
                 <div class="modal-header" style="background: #162F55;">
                     <h5 class="modal-title text-white" id="modalTambahLabel">
-                        <i class="fas fa-plus-circle mr-2"></i>Tambah Pengumuman
+                        Tambah Pengumuman
                     </h5>
                     <button class="close text-white" type="button" data-dismiss="modal"><span>&times;</span></button>
                 </div>
@@ -622,7 +622,7 @@ if ($r = mysqli_query($koneksi, $sql)) {
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save mr-1"></i>Simpan Pengumuman
+                            </i>Simpan Pengumuman
                         </button>
                     </div>
                 </form>
@@ -683,7 +683,7 @@ if ($r = mysqli_query($koneksi, $sql)) {
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary text-white">
-                            <i class="fas fa-save mr-1"></i>Simpan Perubahan
+                            Simpan Perubahan
                         </button>
                     </div>
                 </form>
