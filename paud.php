@@ -31,7 +31,7 @@ $r_kegiatan_bidang = mysqli_query($conn, $q_kegiatan_bidang);
         </ul>
       </div>
 
-      <div class="reveal" style="margin-top:40px">
+    <div class="reveal" style="margin-top:40px">
       <h3 class="kegiatan-bidang-title">Kegiatan Pada Bidang <?= htmlspecialchars($nama_bidang) ?></h3>
       <div class="kegiatan-bidang-table-wrap">
         <table class="kegiatan-bidang-table">

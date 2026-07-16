@@ -1,39 +1,6 @@
 <?php
 
-include 'koneksi.php';
-
-function resolve_gallery_image($filename) {
-  $dir = __DIR__ . '/img/galeri';
-  if (empty($filename)) return null;
-
-  $exact = $dir . '/' . $filename;
-  if (file_exists($exact)) return $filename;
-
-  if (preg_match('/_(\d+)_(\d+)$/', pathinfo($filename, PATHINFO_FILENAME), $m)) {
-    $suffix = $m[1] . '_' . $m[2];
-    $entries = scandir($dir);
-    foreach ($entries as $entry) {
-      if ($entry === '.' || $entry === '..') continue;
-      $entryPath = $dir . '/' . $entry;
-      if (!is_file($entryPath)) continue;
-      if (preg_match('/_(\d+)_(\d+)$/', pathinfo($entry, PATHINFO_FILENAME), $m2) && $m2[1] . '_' . $m2[2] === $suffix) {
-        return $entry;
-      }
-    }
-  }
-
-  $entries = scandir($dir);
-  foreach ($entries as $entry) {
-    if ($entry === '.' || $entry === '..') continue;
-    $entryPath = $dir . '/' . $entry;
-    if (is_file($entryPath) && in_array(strtolower(pathinfo($entryPath, PATHINFO_EXTENSION)), ['jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp'], true)) {
-      return $entry;
-    }
-  }
-
-  return null;
-}
-
+include 'koneksi.php' ;
 // Ambil data profil (visi, misi)
 $query_profil = "SELECT visi, misi FROM profil LIMIT 1";
 $result_profil = mysqli_query($conn, $query_profil);
@@ -45,7 +12,7 @@ $result_berita = mysqli_query($conn, $query_berita);
 $berita_utama = mysqli_fetch_assoc($result_berita);
 
 // Ambil 3 pengumuman terbaru
-$query_pengumuman = "SELECT judul, tanggal FROM pengumuman WHERE status='terbit' ORDER BY tanggal DESC LIMIT 3";
+$query_pengumuman = "SELECT id, judul, tanggal FROM pengumuman WHERE status='terbit' ORDER BY tanggal DESC LIMIT 3";
 $result_pengumuman = mysqli_query($conn, $query_pengumuman);
 
 // Ambil 5 galeri terbaru
@@ -78,14 +45,14 @@ $result_pegawai = mysqli_query($conn, $query_pegawai);
 <!-- ===== TICKER ===== -->
 <div class="ticker">
   <div class="ticker-inner">
-    <span>Sampaikan Pengaduan dan Aspirasi Anda Melalui Layanan Kami</span>
-    <span>Penyaluran BOS Triwulan III Selesai</span>
-    <span>Pelatihan Guru Penggerak Angkatan XI</span>
-    <span>Festival Seni Pelajar Sumenep 2026</span>
-    <span>PPDB 2026/2027 Dibuka 1 Juli 2026</span>
-    <span>Penyaluran BOS Triwulan III Selesai</span>
-    <span>Pelatihan Guru Penggerak Angkatan XI</span>
-    <span>Festival Seni Pelajar Sumenep 2026</span>
+    <span>Bismillah Melayani</span>
+    <span>Disdik Sumenep</span>
+    <span>Bismillah Melayani</span>
+    <span>Disdik Sumenep</span>
+    <span>Bismillah Melayani</span>
+    <span>Disdik Sumenepi</span>
+    <span>Bismillah Melayani</span>
+    <span>Disdik Sumenep</span>
   </div>
 </div>
  
@@ -183,13 +150,13 @@ $result_pegawai = mysqli_query($conn, $query_pegawai);
       <div class="news-sidebar">
         <?php if (mysqli_num_rows($result_pengumuman) > 0): ?>
           <?php while ($row = mysqli_fetch_assoc($result_pengumuman)): ?>
-          <div class="news-list-card reveal">
+          <a href="?page=detail_pengumuman&id=<?= $row['id'] ?>" class="news-list-card reveal" style="text-decoration:none;color:inherit;display:block">
             <div class="news-badge sidebar-badge" style="background:#166534;">Info</div>
             <div class="news-list-item">
               <h4><?= htmlspecialchars($row['judul']) ?></h4>
               <span><?= date('d F Y', strtotime($row['tanggal'])) ?></span>
             </div>
-          </div>
+          </a>
           <?php endwhile; ?>
         <?php else: ?>
           <div class="news-list-card reveal">
@@ -286,15 +253,10 @@ $result_pegawai = mysqli_query($conn, $query_pegawai);
     </div>
     <div class="galeri-grid">
       <?php if (mysqli_num_rows($result_galeri) > 0): ?>
-        <?php while ($row = mysqli_fetch_assoc($result_galeri)):
-          $resolved_gambar = resolve_gallery_image($row['gambar']);
-          $gambar_url = $resolved_gambar ? 'img/galeri/' . $resolved_gambar : null;
-          $gambar_path = $resolved_gambar ? __DIR__ . '/img/galeri/' . $resolved_gambar : null;
-          $ada_gambar = !empty($resolved_gambar) && !empty($gambar_path) && file_exists($gambar_path);
-        ?>
+        <?php while ($row = mysqli_fetch_assoc($result_galeri)): ?>
         <div class="galeri-item reveal">
-          <?php if ($ada_gambar): ?> 
-            <div class="galeri-bg" style="background-image: url('<?= htmlspecialchars($gambar_url) ?>'); background-size:cover; background-position:center;"></div>
+          <?php if ($row['gambar'] && file_exists('img/galeri/' . $row['gambar'])): ?>
+            <div class="galeri-bg" style="background-image: url('img/galeri/<?= $row['gambar'] ?>'); background-size:cover; background-position:center;"></div>
           <?php else: ?>
             <div class="galeri-bg" style="background: linear-gradient(135deg, #1a3a5c, #2a5f7a);"></div>
           <?php endif; ?>
@@ -317,7 +279,7 @@ $result_pegawai = mysqli_query($conn, $query_pegawai);
         <div class="section-label">Sumber Daya Manusia</div>
         <div class="section-title">Pimpinan &amp; Staff</div>
       </div>
-      <a href="?page=profil_karyawan" class="link-all">Lihat semua pegawai</a>
+      <a href="?page=pegawai" class="link-all">Lihat semua pegawai</a>
     </div>
     <div class="pegawai-grid">
       <?php if (mysqli_num_rows($result_pegawai) > 0): ?>

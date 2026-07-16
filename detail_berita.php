@@ -32,7 +32,7 @@ if ($id > 0) {
   <div class="section-inner" style="max-width:820px">
 
     <?php
-      $gambar_path = 'uploads/berita/' . $berita['gambar'];
+      $gambar_path = 'img/berita/' . $berita['gambar'];
       $ada = !empty($berita['gambar']) && file_exists($gambar_path);
     ?>
     <?php if ($ada): ?>

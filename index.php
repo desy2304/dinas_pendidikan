@@ -1,12 +1,12 @@
 <?php
 // Koneksi database
-require_once __DIR__ . '/koneksi.php';
+include 'koneksi.php';
 
 // Tentukan halaman yang diminta (default: home)
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
 // Daftar halaman yang diizinkan
-$allowed_pages = ['home', 'berita', 'detail_berita', 'profil_selayang', 'profil_struktur', 'profil_karyawan', 'profil_tupoksi', 'profil_peta', 'profil_kegiatan', 'galeri_foto', 'galeri_video', 'galeri_kegiatan', 'galeri_prestasi', 'layanan_info', 'layanan_publik', 'layanan_panduan', 'layanan_sakip', 'layanan_faq', 'detail_layanan', 'pegawai', 'pengaduan', 'sekretariat', 'paud', 'sd', 'smp', 'ketenagaan', 'eboss', 'epegawai', 'ebudaya', 'eskm', 'simantap'];
+$allowed_pages = ['home', 'berita', 'detail_berita', 'detail_pengumuman', 'profil_selayang', 'profil_struktur', 'profil_karyawan', 'profil_tupoksi', 'profil_peta', 'profil_kegiatan', 'galeri_foto', 'galeri_video', 'galeri_kegiatan', 'galeri_prestasi', 'layanan_info', 'layanan_publik', 'layanan_panduan', 'layanan_sakip', 'layanan_faq', 'detail_layanan', 'pegawai', 'pengaduan', 'sekretariat', 'paud', 'sd', 'smp', 'ketenagaan', 'eboss', 'epegawai', 'ebudaya', 'eskm', 'simantap'];
 if (!in_array($page, $allowed_pages)) {
     $page = 'home';
 }
@@ -58,7 +58,7 @@ if (!file_exists($file)) {
           <a href="?page=profil_struktur">Struktur Organisasi</a>
           <a href="?page=profil_karyawan">Data Karyawan</a>
           <a href="?page=profil_tupoksi">Tugas Pokok Dan Fungsi</a>
-          <a href="?page=profil_peta">Peta</a>
+          <a href="?page=profil_peta">Peta Sekolah</a>
           <a href="?page=profil_kegiatan">Kegiatan</a>
         </div>
       </div>
