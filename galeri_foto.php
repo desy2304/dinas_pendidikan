@@ -2,6 +2,38 @@
 
 include 'koneksi.php';
 
+function resolve_gallery_image($filename) {
+  $dir = __DIR__ . '/img/galeri';
+  if (empty($filename)) return null;
+
+  $exact = $dir . '/' . $filename;
+  if (file_exists($exact)) return $filename;
+
+  if (preg_match('/_(\d+)_(\d+)$/', pathinfo($filename, PATHINFO_FILENAME), $m)) {
+    $suffix = $m[1] . '_' . $m[2];
+    $entries = scandir($dir);
+    foreach ($entries as $entry) {
+      if ($entry === '.' || $entry === '..') continue;
+      $entryPath = $dir . '/' . $entry;
+      if (!is_file($entryPath)) continue;
+      if (preg_match('/_(\d+)_(\d+)$/', pathinfo($entry, PATHINFO_FILENAME), $m2) && $m2[1] . '_' . $m2[2] === $suffix) {
+        return $entry;
+      }
+    }
+  }
+
+  $entries = scandir($dir);
+  foreach ($entries as $entry) {
+    if ($entry === '.' || $entry === '..') continue;
+    $entryPath = $dir . '/' . $entry;
+    if (is_file($entryPath) && in_array(strtolower(pathinfo($entryPath, PATHINFO_EXTENSION)), ['jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp'], true)) {
+      return $entry;
+    }
+  }
+
+  return null;
+}
+
 $per_page = 8;
 $halaman = isset($_GET['p']) ? max(1, (int) $_GET['p']) : 1;
 $offset  = ($halaman - 1) * $per_page;
@@ -26,11 +58,16 @@ $r = mysqli_query($conn, $q);
   <div class="section-inner">
     <div class="galeri-full-grid">
       <?php if ($r && mysqli_num_rows($r) > 0): ?>
-        <?php while ($row = mysqli_fetch_assoc($r)): ?>
-        <div class="galeri-full-item reveal" <?php if (!empty($row['gambar']) && file_exists('img/galeri/' . $row['gambar'])): ?>onclick="openLightbox('img/galeri/<?= htmlspecialchars($row['gambar']) ?>')"<?php endif; ?>>
+        <?php while ($row = mysqli_fetch_assoc($r)):
+          $resolved_gambar = resolve_gallery_image($row['gambar']);
+          $gambar_url = $resolved_gambar ? 'img/galeri/' . $resolved_gambar : null;
+          $gambar_path = $resolved_gambar ? __DIR__ . '/img/galeri/' . $resolved_gambar : null;
+          $ada_gambar = !empty($resolved_gambar) && !empty($gambar_path) && file_exists($gambar_path);
+        ?>
+        <div class="galeri-full-item reveal" <?php if ($ada_gambar): ?>onclick="openLightbox('<?= htmlspecialchars($gambar_url) ?>')"<?php endif; ?>>
           <div class="galeri-full-thumb">
-            <?php if (!empty($row['gambar']) && file_exists('img/galeri/' . $row['gambar'])): ?>
-              <img src="img/galeri/<?= htmlspecialchars($row['gambar']) ?>" alt="<?= htmlspecialchars($row['judul']) ?>">
+            <?php if ($ada_gambar): ?>
+              <img src="<?= htmlspecialchars($gambar_url) ?>" alt="<?= htmlspecialchars($row['judul']) ?>">
             <?php else: ?>
               <div class="galeri-full-fallback"><i class="bi bi-image"></i></div>
             <?php endif; ?>

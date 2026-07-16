@@ -2,6 +2,38 @@
 
 include 'koneksi.php';
 
+function resolve_gallery_image($filename) {
+  $dir = __DIR__ . '/img/galeri';
+  if (empty($filename)) return null;
+
+  $exact = $dir . '/' . $filename;
+  if (file_exists($exact)) return $filename;
+
+  if (preg_match('/_(\d+)_(\d+)$/', pathinfo($filename, PATHINFO_FILENAME), $m)) {
+    $suffix = $m[1] . '_' . $m[2];
+    $entries = scandir($dir);
+    foreach ($entries as $entry) {
+      if ($entry === '.' || $entry === '..') continue;
+      $entryPath = $dir . '/' . $entry;
+      if (!is_file($entryPath)) continue;
+      if (preg_match('/_(\d+)_(\d+)$/', pathinfo($entry, PATHINFO_FILENAME), $m2) && $m2[1] . '_' . $m2[2] === $suffix) {
+        return $entry;
+      }
+    }
+  }
+
+  $entries = scandir($dir);
+  foreach ($entries as $entry) {
+    if ($entry === '.' || $entry === '..') continue;
+    $entryPath = $dir . '/' . $entry;
+    if (is_file($entryPath) && in_array(strtolower(pathinfo($entryPath, PATHINFO_EXTENSION)), ['jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp'], true)) {
+      return $entry;
+    }
+  }
+
+  return null;
+}
+
 // Ambil data profil (visi, misi)
 $query_profil = "SELECT visi, misi FROM profil LIMIT 1";
 $result_profil = mysqli_query($conn, $query_profil);
@@ -254,10 +286,15 @@ $result_pegawai = mysqli_query($conn, $query_pegawai);
     </div>
     <div class="galeri-grid">
       <?php if (mysqli_num_rows($result_galeri) > 0): ?>
-        <?php while ($row = mysqli_fetch_assoc($result_galeri)): ?>
+        <?php while ($row = mysqli_fetch_assoc($result_galeri)):
+          $resolved_gambar = resolve_gallery_image($row['gambar']);
+          $gambar_url = $resolved_gambar ? 'img/galeri/' . $resolved_gambar : null;
+          $gambar_path = $resolved_gambar ? __DIR__ . '/img/galeri/' . $resolved_gambar : null;
+          $ada_gambar = !empty($resolved_gambar) && !empty($gambar_path) && file_exists($gambar_path);
+        ?>
         <div class="galeri-item reveal">
-          <?php if ($row['gambar'] && file_exists('img/galeri/' . $row['gambar'])): ?>
-            <div class="galeri-bg" style="background-image: url('img/galeri/<?= $row['gambar'] ?>'); background-size:cover; background-position:center;"></div>
+          <?php if ($ada_gambar): ?> 
+            <div class="galeri-bg" style="background-image: url('<?= htmlspecialchars($gambar_url) ?>'); background-size:cover; background-position:center;"></div>
           <?php else: ?>
             <div class="galeri-bg" style="background: linear-gradient(135deg, #1a3a5c, #2a5f7a);"></div>
           <?php endif; ?>
@@ -288,8 +325,8 @@ $result_pegawai = mysqli_query($conn, $query_pegawai);
         <div class="pegawai-card reveal">
           <div class="pegawai-avatar">
             <div class="pegawai-avatar-circle">
-              <?php if ($row['foto'] && file_exists('uploads/pegawai/' . $row['foto'])): ?>
-                <img src="uploads/pegawai/<?= htmlspecialchars($row['foto']) ?>" alt="Foto" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">
+              <?php if ($row['foto'] && file_exists('img/pegawai/' . $row['foto'])): ?>
+                <img src="img/pegawai/<?= htmlspecialchars($row['foto']) ?>" alt="Foto" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">
               <?php else: ?>
                 <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
               <?php endif; ?>
