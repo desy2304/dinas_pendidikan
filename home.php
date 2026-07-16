@@ -159,7 +159,7 @@ $result_pegawai = mysqli_query($conn, $query_pegawai);
         <div class="featured-img reveal">
           <div class="news-badge">Terbaru</div>
           <?php 
-            $gambar_path = 'uploads/berita/' . $berita_utama['gambar'];
+            $gambar_path = 'img/berita/' . $berita_utama['gambar'];
             // Cek apakah ada gambar dan file benar-benar ada
             if (!empty($berita_utama['gambar']) && file_exists($gambar_path)): 
           ?>
