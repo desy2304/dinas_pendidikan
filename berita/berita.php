@@ -27,26 +27,20 @@ $hariList  = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', "Jum'at", 'Sabtu'];
 $bulanList = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
 
-$whereBerita     = '';
-$wherePengumuman = "WHERE status = 'terbit' AND status = 'draf'";
-$wherePengaduan  = '1=1';
-$labelPeriode    = 'Semua Waktu';
+$whereBerita  = '';
+$labelPeriode = 'Semua Waktu';
 
 if ($filterMode === 'bulan' && preg_match('/^\d{4}-\d{2}$/', $filterBulanInput)) {
     [$thn, $bln] = explode('-', $filterBulanInput);
     $thn = (int)$thn;
     $bln = (int)$bln;
 
-    $whereBerita     = "WHERE MONTH(created_at) = $bln AND YEAR(created_at) = $thn";
-    $wherePengumuman = "WHERE status = 'terbit' AND MONTH(tanggal) = $bln AND YEAR(tanggal) = $thn";
-    $wherePengaduan  = "MONTH(created_at) = $bln AND YEAR(created_at) = $thn";
-    $labelPeriode    = 'Bulan ' . ($bulanList[$bln] ?? $bln) . ' ' . $thn;
+    $whereBerita  = "WHERE MONTH(created_at) = $bln AND YEAR(created_at) = $thn";
+    $labelPeriode = 'Bulan ' . ($bulanList[$bln] ?? $bln) . ' ' . $thn;
 } elseif ($filterMode === 'hari' && preg_match('/^\d{4}-\d{2}-\d{2}$/', $filterHariInput)) {
     $hariEsc = mysqli_real_escape_string($koneksi, $filterHariInput);
 
-    $whereBerita     = "WHERE DATE(created_at) = '$hariEsc'";
-    $wherePengumuman = "WHERE status = 'terbit' AND tanggal = '$hariEsc'";
-    $wherePengaduan  = "DATE(created_at) = '$hariEsc'";
+    $whereBerita = "WHERE DATE(created_at) = '$hariEsc'";
 
     $ts = strtotime($filterHariInput);
     $labelPeriode = $hariList[date('w', $ts)] . ', ' . date('j', $ts) . ' ' . $bulanList[(int)date('n', $ts)] . ' ' . date('Y', $ts);
@@ -83,11 +77,13 @@ $notifMsg = [
 ];
 
 $daftarBerita = [];
+$batasTampil = ($filterMode === 'semua') ? ' LIMIT 5' : '';
 $sqlBerita = "SELECT b.id, b.judul, b.slug, b.gambar, b.status, b.kategori_id, b.isi, b.tanggal_publish, b.created_at,
                      k.nama AS kategori_nama
               FROM berita b
               LEFT JOIN kategori_berita k ON k.id = b.kategori_id
-              ORDER BY b.created_at DESC";
+              $whereBerita
+              ORDER BY b.created_at DESC" . $batasTampil;
 if ($r = mysqli_query($koneksi, $sqlBerita)) {
     while ($row = mysqli_fetch_assoc($r)) {
         $daftarBerita[] = $row;
@@ -552,6 +548,7 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
                                                                     data-judul="<?= htmlspecialchars($b['judul'], ENT_QUOTES) ?>"
                                                                     data-kategori="<?= (int)($b['kategori_id'] ?? 0) ?>"
                                                                     data-status="<?= htmlspecialchars($b['status']) ?>"
+                                                                    data-tanggal="<?= htmlspecialchars($b['tanggal_publish'] ?? '') ?>"
                                                                     data-gambar="<?= htmlspecialchars($b['gambar'] ?? '') ?>">
                                                                     <i class="fas fa-pen"></i>
                                                                 </button>
@@ -618,7 +615,7 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
                         </div>
 
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label class="font-weight-bold small d-flex justify-content-between align-items-center">
                                     Kategori
                                     <button type="button" class="btn btn-sm btn-outline-primary py-0 px-2" style="font-size:11px;"
@@ -633,7 +630,11 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
+                                <label class="font-weight-bold small">Tanggal Publish</label>
+                                <input type="date" class="form-control" name="tanggal_publish" value="<?= date('Y-m-d') ?>">
+                            </div>
+                            <div class="form-group col-md-4">
                                 <label class="font-weight-bold small">Status</label>
                                 <select class="form-control" name="status">
                                     <option value="draf">Simpan sebagai Draft</option>
@@ -684,7 +685,7 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
                         </div>
 
                         <div class="form-row">
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <label class="font-weight-bold small d-flex justify-content-between align-items-center">
                                     Kategori
                                     <button type="button" class="btn btn-sm btn-outline-primary py-0 px-2" style="font-size:11px;"
@@ -699,7 +700,11 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
                                     <?php endforeach; ?>
                                 </select>
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
+                                <label class="font-weight-bold small">Tanggal Publish</label>
+                                <input type="date" class="form-control" name="tanggal_publish" id="edit-tanggal">
+                            </div>
+                            <div class="form-group col-md-4">
                                 <label class="font-weight-bold small">Status</label>
                                 <select class="form-control" name="status" id="edit-status">
                                     <option value="draf">Simpan sebagai Draft</option>
@@ -840,6 +845,7 @@ if ($r = mysqli_query($koneksi, $sqlBerita)) {
             document.getElementById('edit-judul').value = d.judul;
             document.getElementById('edit-kategori').value = d.kategori || '';
             document.getElementById('edit-status').value = d.status;
+            document.getElementById('edit-tanggal').value = d.tanggal || '';
 
             var isiEl = document.getElementById('isi-data-' + d.id);
             document.getElementById('edit-isi').value = isiEl ? isiEl.value : '';

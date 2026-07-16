@@ -25,6 +25,9 @@ $kategoriId = !empty($_POST['kategori_id']) ? (int)$_POST['kategori_id'] : null;
 $status     = ($_POST['status'] ?? 'draf') === 'terbit' ? 'terbit' : 'draf';
 $adminId    = isset($_SESSION['user']['id']) ? (int)$_SESSION['user']['id'] : null;
 
+$tanggalInput = trim($_POST['tanggal_publish'] ?? '');
+$tanggalValid = (bool)preg_match('/^\d{4}-\d{2}-\d{2}$/', $tanggalInput);
+
 if ($judul === '' || $isi === '') {
     header("Location: berita.php?notif=gagal_kosong");
     exit;
@@ -75,7 +78,16 @@ $slugEsc  = mysqli_real_escape_string($koneksi, $slug);
 $gambarVal = $namaGambar ? "'" . mysqli_real_escape_string($koneksi, $namaGambar) . "'" : "NULL";
 $kategoriVal  = $kategoriId ? $kategoriId : "NULL";
 $adminVal     = $adminId ? $adminId : "NULL";
-$tanggalPublish = ($status === 'terbit') ? "'" . date('Y-m-d') . "'" : "NULL";
+
+// Tanggal publish: pakai yang diisi manual di form kalau valid;
+// kalau kosong/tidak valid, tetap isi otomatis hari ini asal statusnya "terbit".
+if ($tanggalValid) {
+    $tanggalPublish = "'" . $tanggalInput . "'";
+} elseif ($status === 'terbit') {
+    $tanggalPublish = "'" . date('Y-m-d') . "'";
+} else {
+    $tanggalPublish = "NULL";
+}
 
 $sql = "INSERT INTO berita (admin_id, kategori_id, judul, slug, isi, gambar, status, tanggal_publish)
         VALUES ($adminVal, $kategoriVal, '$judulEsc', '$slugEsc', '$isiEsc', $gambarVal, '$status', $tanggalPublish)";

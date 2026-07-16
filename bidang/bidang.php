@@ -44,8 +44,29 @@ if ($r = mysqli_query($koneksi, $sql)) {
         $daftarBidang[] = $row;
 }
 
-// Icon per urutan bidang (berulang jika lebih dari 6)
-$icons = ['fa-sitemap','fa-child','fa-user-graduate','fa-laptop-code','fa-coins','fa-users'];
+function getIconBidang($nama)
+{
+    switch (strtolower(trim($nama))) {
+
+        case 'sekretariat':
+            return 'fa-building';
+
+        case 'bidang paud dan pnf':
+            return 'fa-child';
+
+        case 'bidang pembinaan sd':
+            return 'fa-school';
+
+        case 'bidang pembinaan smp':
+            return 'fa-user-graduate';
+
+        case 'bidang pembinaan ketenagaan':
+            return 'fa-users';
+
+        default:
+            return 'fa-sitemap';
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -260,9 +281,9 @@ $icons = ['fa-sitemap','fa-child','fa-user-graduate','fa-laptop-code','fa-coins'
 
             <!-- Notifikasi -->
             <?php if ($notif && isset($notifMsg[$notif])): ?>
-            <div class="alert alert-<?= $notifMsg[$notif]['type'] ?> alert-dismissible alert-notif shadow-sm mb-4">
+            <div id="notifAlert" class="alert alert-<?= $notifMsg[$notif]['type'] ?> alert-dismissible fade show shadow-sm mb-4">
                 <i class="fas <?= $notifMsg[$notif]['icon'] ?> mr-2"></i>
-                <?= $notifMsg[$notif]['text'] ?>
+                <?= htmlspecialchars($notifMsg[$notif]['text']) ?>
                 <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
             </div>
             <?php endif; ?>
@@ -333,7 +354,7 @@ $icons = ['fa-sitemap','fa-child','fa-user-graduate','fa-laptop-code','fa-coins'
                         <div class="bidang-card-header" onclick="toggleBidang(this)">
                             <div class="d-flex align-items-center" style="gap:14px;">
                                 <div class="bidang-icon">
-                                    <i class="fas <?= $icons[$i % count($icons)] ?>"></i>
+                                    <i class="fas <?= getIconBidang($b['nama']) ?>"></i>
                                 </div>
                                 <div>
                                     <div class="bidang-nama"><?= htmlspecialchars($b['nama']) ?></div>
@@ -557,6 +578,14 @@ document.querySelectorAll('.btn-hapus').forEach(function (btn) {
         $('#modalHapus').modal('show');
     });
 });
+
+(function () {
+    var alertBox = document.getElementById('notifAlert');
+    if (alertBox) setTimeout(function () { $(alertBox).alert('close'); }, 4000);
+    if (window.history.replaceState && window.location.search.indexOf('notif=') !== -1) {
+        window.history.replaceState(null, '', window.location.pathname);
+    }
+})();
 </script>
 
 </body>

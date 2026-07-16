@@ -18,6 +18,9 @@ $isi        = trim($_POST['isi'] ?? '');
 $kategoriId = !empty($_POST['kategori_id']) ? (int)$_POST['kategori_id'] : null;
 $status     = ($_POST['status'] ?? 'draf') === 'terbit' ? 'terbit' : 'draf';
 
+$tanggalInput = trim($_POST['tanggal_publish'] ?? '');
+$tanggalValid = (bool)preg_match('/^\d{4}-\d{2}-\d{2}$/', $tanggalInput);
+
 if ($id <= 0) {
     header("Location: berita.php?notif=not_found");
     exit;
@@ -61,10 +64,17 @@ if (!empty($_FILES['gambar']['name']) && $_FILES['gambar']['error'] === UPLOAD_E
     }
 }
 
-// Tentukan tanggal_publish: isi otomatis kalau baru pertama kali terbit
-$tanggalPublish = $dataLama['tanggal_publish'];
-if ($status === 'terbit' && empty($tanggalPublish)) {
-    $tanggalPublish = date('Y-m-d');
+// Tentukan tanggal_publish:
+// 1) Pakai yang diisi manual di form kalau valid.
+// 2) Kalau tidak diisi/tidak valid: pertahankan tanggal lama, atau isi otomatis
+//    hari ini kalau baru pertama kali berstatus "terbit" dan belum pernah ada tanggalnya.
+if ($tanggalValid) {
+    $tanggalPublish = $tanggalInput;
+} else {
+    $tanggalPublish = $dataLama['tanggal_publish'];
+    if ($status === 'terbit' && empty($tanggalPublish)) {
+        $tanggalPublish = date('Y-m-d');
+    }
 }
 
 $judulEsc  = mysqli_real_escape_string($koneksi, $judul);
