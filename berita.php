@@ -2,6 +2,25 @@
 
 include 'koneksi.php';
 
+function resolve_news_image($filename) {
+  $candidates = [];
+
+  if (!empty($filename)) {
+    $candidates[] = __DIR__ . '/uploads/berita/' . $filename;
+    $candidates[] = __DIR__ . '/img/berita/' . $filename;
+    $candidates[] = __DIR__ . '/img/' . $filename;
+    $candidates[] = __DIR__ . '/' . $filename;
+  }
+
+  foreach ($candidates as $path) {
+    if (!empty($path) && file_exists($path)) {
+      return $path;
+    }
+  }
+
+  return null;
+}
+
 // ===== BERITA (paginasi) =====
 $per_page = 9;
 $halaman = isset($_GET['p']) ? max(1, (int) $_GET['p']) : 1;
@@ -43,13 +62,14 @@ $r_pengumuman = mysqli_query($conn, $q_pengumuman);
     <div class="kegiatan-grid">
       <?php if ($r_berita && mysqli_num_rows($r_berita) > 0): ?>
         <?php while ($row = mysqli_fetch_assoc($r_berita)):
-          $gambar_path = 'uploads/berita/' . $row['gambar'];
-          $ada = !empty($row['gambar']) && file_exists($gambar_path);
+          $resolved_image_path = resolve_news_image($row['gambar']);
+          $gambar_url = $resolved_image_path ? str_replace(__DIR__ . '/', '', $resolved_image_path) : null;
+          $ada = !empty($resolved_image_path) && file_exists($resolved_image_path);
         ?>
         <div class="kegiatan-card reveal">
           <div class="kegiatan-thumb">
             <?php if ($ada): ?>
-              <img src="<?= htmlspecialchars($gambar_path) ?>" alt="<?= htmlspecialchars($row['judul']) ?>">
+              <img src="<?= htmlspecialchars($gambar_url) ?>" alt="<?= htmlspecialchars($row['judul']) ?>">
             <?php else: ?>
               <div class="kegiatan-thumb-fallback"><i class="bi bi-newspaper"></i></div>
             <?php endif; ?>
