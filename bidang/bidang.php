@@ -128,6 +128,10 @@ function getIconBidang($nama)
         .modal-header-merah { background:#162F55; }
         .modal-header-merah .modal-title,
         .modal-header-merah .close { color:#fff; text-shadow:none; opacity:1; }
+
+        .sidebar.toggled .sidebar-brand-text {
+            display: none !important;
+        }
     </style>
 </head>
 <body id="page-top">
@@ -139,7 +143,7 @@ function getIconBidang($nama)
             <div class="sidebar-brand-icon">
                 <i><img src="../img/Logo1.png" alt="" style="width:60px;height:60px;object-fit:contain;"></i>
             </div>
-            <div class="d-flex flex-column" style="color:#fff !important;">
+            <div class="sidebar-brand-text d-flex flex-column" style="color:#fff !important;">
                 <div style="font-size:.7rem;">Dinas Pendidikan</div>
                 <div style="font-size:.5rem;"><i>Kabupaten Sumenep</i></div>
             </div>

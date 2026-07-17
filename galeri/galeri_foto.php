@@ -255,6 +255,10 @@ function formatTanggalIndo($tgl, $bulanIndo) {
             border-color: #162F55; 
             color: #fff; 
         }
+
+        .sidebar.toggled .sidebar-brand-text {
+            display: none !important;
+        }
     </style>
 </head>
 <body id="page-top">
@@ -266,7 +270,7 @@ function formatTanggalIndo($tgl, $bulanIndo) {
                 <div class="sidebar-brand-icon">
                     <i><img src="../img/Logo1.png" alt="" style="width:60px;height:60px;object-fit:contain;"></i>
                 </div>
-                <div class="d-flex flex-column" style="color:white;">
+                <div class="sidebar-brand-text d-flex flex-column" style="color:white;">
                     <div style="font-size:.7rem;">Dinas Pendidikan</div>
                     <div style="font-size:.5rem;"><i>Kabupaten Sumenep</i></div>
                 </div>

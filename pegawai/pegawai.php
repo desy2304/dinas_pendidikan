@@ -169,6 +169,10 @@ if ($r = mysqli_query($koneksi, $sqlPegawai)) {
             object-fit: cover;
             border: 1px solid #eee0e3;
         }
+
+        .sidebar.toggled .sidebar-brand-text {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -185,7 +189,7 @@ if ($r = mysqli_query($koneksi, $sqlPegawai)) {
                 <div class="sidebar-brand-icon">
                     <i><img src="../img/Logo1.png" alt="" style="width: 60px; height: 60px; object-fit: contain;"></i>
                 </div>
-                <div class="d-flex flex-column" style="color: #fff !important;">
+                <div class=" sidebar-brand-text d-flex flex-column" style="color: #fff !important;">
                     <div style="font-size: 0.7rem;">Dinas Pendidikan</div>
                     <div style="font-size: 0.5rem;"><i>Kabupaten Sumenep</i></div>
                 </div>
