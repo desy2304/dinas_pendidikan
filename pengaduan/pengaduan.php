@@ -7,6 +7,29 @@ if (!isset($_SESSION['user'])) {
 }
 
 include __DIR__ . '/../koneksi.php';
+include __DIR__ . '/../konfigurasi_upload.php';
+
+// Folder tempat lampiran pengaduan disimpan (di dalam folder "main"/user
+// yang dibagi bersama, sama seperti pola upload galeri/berita sebelumnya).
+// Kalau form pengaduan publik kamu menyimpan ke folder lain, ganti nilai ini.
+define('LAMPIRAN_SUBFOLDER', 'uploads/lampiran/');
+
+/**
+ * Normalisasi nilai kolom `lampiran` dari database, karena belum ada
+ * konvensi baku sebelumnya -- bisa jadi cuma nama file, atau sudah
+ * berupa path relatif. Fungsi ini mengembalikan path relatif yang
+ * konsisten terhadap folder upload bersama (UPLOAD_DIR).
+ */
+function normalisasiLampiran($nilai)
+{
+    if (empty($nilai)) return null;
+    // Kalau nilainya sudah mengandung folder (ada "/"), anggap sudah path lengkap relatif ke shared root.
+    if (strpos($nilai, '/') !== false) {
+        return ltrim($nilai, '/');
+    }
+    // Kalau cuma nama file polos, tempelkan folder standar lampiran.
+    return LAMPIRAN_SUBFOLDER . $nilai;
+}
 
 $kategoriLabel = [
     'sarana_prasarana' => 'Sarana & Prasarana',
@@ -33,26 +56,20 @@ $hariList  = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', "Jum'at", 'Sabtu'];
 $bulanList = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
 
-$whereBerita     = '';
-$wherePengumuman = "WHERE status = 'terbit' AND status = 'draf'";
-$wherePengaduan  = '1=1';
-$labelPeriode    = 'Semua Waktu';
+$wherePengaduan = '1=1';
+$labelPeriode   = 'Semua Waktu';
 
 if ($filterMode === 'bulan' && preg_match('/^\d{4}-\d{2}$/', $filterBulanInput)) {
     [$thn, $bln] = explode('-', $filterBulanInput);
     $thn = (int)$thn;
     $bln = (int)$bln;
 
-    $whereBerita     = "WHERE MONTH(created_at) = $bln AND YEAR(created_at) = $thn";
-    $wherePengumuman = "WHERE status = 'terbit' AND MONTH(tanggal) = $bln AND YEAR(tanggal) = $thn";
-    $wherePengaduan  = "MONTH(created_at) = $bln AND YEAR(created_at) = $thn";
-    $labelPeriode    = 'Bulan ' . ($bulanList[$bln] ?? $bln) . ' ' . $thn;
+    $wherePengaduan = "MONTH(created_at) = $bln AND YEAR(created_at) = $thn";
+    $labelPeriode   = 'Bulan ' . ($bulanList[$bln] ?? $bln) . ' ' . $thn;
 } elseif ($filterMode === 'hari' && preg_match('/^\d{4}-\d{2}-\d{2}$/', $filterHariInput)) {
     $hariEsc = mysqli_real_escape_string($koneksi, $filterHariInput);
 
-    $whereBerita     = "WHERE DATE(created_at) = '$hariEsc'";
-    $wherePengumuman = "WHERE status = 'terbit' AND tanggal = '$hariEsc'";
-    $wherePengaduan  = "DATE(created_at) = '$hariEsc'";
+    $wherePengaduan = "DATE(created_at) = '$hariEsc'";
 
     $ts = strtotime($filterHariInput);
     $labelPeriode = $hariList[date('w', $ts)] . ', ' . date('j', $ts) . ' ' . $bulanList[(int)date('n', $ts)] . ' ' . date('Y', $ts);
@@ -103,12 +120,21 @@ if ($r = mysqli_query($koneksi, $sqlThread)) {
 
 // ==== Daftar pengaduan ====
 $daftarPengaduan = [];
+$batasTampil = ($filterMode === 'semua') ? ' LIMIT 5' : '';
 $sqlPengaduan = "SELECT id, no_tiket, nama, email, telepon, kategori, judul, isi, lampiran, status, created_at
                   FROM pengaduan
                   WHERE $wherePengaduan
-                  ORDER BY created_at DESC";
+                  ORDER BY created_at DESC" . $batasTampil;
 if ($r = mysqli_query($koneksi, $sqlPengaduan)) {
     while ($row = mysqli_fetch_assoc($r)) {
+        // Siapkan URL lampiran (kalau file-nya memang ada secara fisik)
+        $row['lampiran_url']  = null;
+        $row['lampiran_nama'] = null;
+        $lampiranRel = normalisasiLampiran($row['lampiran']);
+        if ($lampiranRel && file_exists(UPLOAD_DIR . $lampiranRel)) {
+            $row['lampiran_url']  = UPLOAD_URL_ADMIN . $lampiranRel;
+            $row['lampiran_nama'] = basename($lampiranRel);
+        }
         $daftarPengaduan[] = $row;
     }
 }
@@ -559,7 +585,7 @@ if ($r = mysqli_query($koneksi, $sqlPengaduan)) {
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h6 class="m-0 font-weight-bold text-dark">Daftar Pengaduan</h6>
-                                <span class="small text-muted"><?= $filterMode === 'semua' ? '5 berita terbaru' : ('Periode: ' . htmlspecialchars($labelPeriode)) ?></span>
+                                <span class="small text-muted"><?= $filterMode === 'semua' ? '5 pengaduan terbaru' : ('Periode: ' . htmlspecialchars($labelPeriode)) ?></span>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -628,7 +654,8 @@ if ($r = mysqli_query($koneksi, $sqlPengaduan)) {
                                                                 data-status="<?= htmlspecialchars($p['status']) ?>"
                                                                 data-statuslabel="<?= htmlspecialchars($statusData['label']) ?>"
                                                                 data-status-class="<?= $statusData['badge'] ?>"
-                                                                data-lampiran="<?= htmlspecialchars($p['lampiran'] ?: '-', ENT_QUOTES) ?>"
+                                                                data-lampiran-url="<?= htmlspecialchars($p['lampiran_url'] ?? '', ENT_QUOTES) ?>"
+                                                                data-lampiran-nama="<?= htmlspecialchars($p['lampiran_nama'] ?? '', ENT_QUOTES) ?>"
                                                                 >Detail</button>
 
                                                             <textarea id="isi-data-<?= (int)$p['id'] ?>" style="display:none;"><?= htmlspecialchars($p['isi'] ?? '') ?></textarea>
@@ -828,8 +855,27 @@ if ($r = mysqli_query($koneksi, $sqlPengaduan)) {
 
             // Lampiran
             var lampiranWrap = document.getElementById('dp-lampiran-wrap');
-            if (d.lampiran && d.lampiran !== '-') {
-                lampiranWrap.innerHTML = '<span class="lampiran-chip"><i class="fas fa-paperclip"></i> ' + d.lampiran + '</span>';
+            lampiranWrap.innerHTML = '';
+            if (d.lampiranUrl) {
+                var link = document.createElement('a');
+                link.href = d.lampiranUrl;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.className = 'lampiran-chip';
+                link.style.textDecoration = 'none';
+
+                var icon = document.createElement('i');
+                icon.className = 'fas fa-paperclip';
+                link.appendChild(icon);
+                link.appendChild(document.createTextNode(' ' + (d.lampiranNama || 'Buka Lampiran')));
+
+                lampiranWrap.appendChild(link);
+            } else if (d.lampiranNama) {
+                // Ada nama file di database, tapi file fisiknya tidak ditemukan di server.
+                var warn = document.createElement('span');
+                warn.className = 'no-thread';
+                warn.textContent = 'File lampiran "' + d.lampiranNama + '" tercatat, tapi tidak ditemukan di server.';
+                lampiranWrap.appendChild(warn);
             } else {
                 lampiranWrap.innerHTML = '<span class="no-thread">Tidak ada lampiran.</span>';
             }
