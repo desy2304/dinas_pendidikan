@@ -67,8 +67,32 @@
 .karyawan-empty{grid-column:1/-1;text-align:center;padding:24px;border:1px dashed var(--line);border-radius:14px;color:var(--muted)}
 
 /* ── TUPOKSI ── */
-.tupoksi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.tupoksi-grid{display:flex;flex-direction:column;gap:24px}
 .tupoksi-grid .profile-card-block p{font-size:14px}
+
+.tupoksi-card{border-radius:20px;padding:36px}
+
+.tupoksi-card-dark{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-mid) 100%);color:#fff;box-shadow:0 16px 40px rgba(11,31,58,.18)}
+.tupoksi-card-dark .tupoksi-title{color:#fff}
+.tupoksi-card-dark .tupoksi-desc{color:#A8BDD4}
+.tupoksi-card-dark .tupoksi-list li{color:#E7EEF5}
+.tupoksi-card-dark .tupoksi-list li i{color:var(--gold-light)}
+
+.tupoksi-card-light{background:var(--white);border:1px solid var(--line);box-shadow:0 10px 30px rgba(11,31,58,.05);display:flex;gap:28px;align-items:flex-start}
+.tupoksi-card-light .tupoksi-title{color:var(--navy)}
+.tupoksi-card-light .tupoksi-list li{color:var(--text)}
+.tupoksi-card-light .tupoksi-list li i{color:var(--gold)}
+.tupoksi-card-light .tupoksi-image{flex:0 0 240px;margin-bottom:0;align-self:center;text-align:left}
+.tupoksi-card-light .tupoksi-image img{width:100% !important;max-width:100% !important;height:auto !important;border-radius:14px;display:block;margin:0;box-shadow:0 0 15px rgba(0,0,0,.2)}
+.tupoksi-card-light .tupoksi-content{flex:1;min-width:0}
+
+.tupoksi-title{font-size:20px;font-weight:700;margin-bottom:16px;line-height:1.35}
+.tupoksi-desc{font-size:14.5px;line-height:1.85;margin-bottom:22px}
+.tupoksi-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:13px}
+.tupoksi-list li{display:flex;align-items:flex-start;gap:10px;font-size:14px;line-height:1.7}
+.tupoksi-list li i{margin-top:3px;flex-shrink:0;font-size:15px}
+
+.tupoksi-image{text-align:center;margin-bottom:22px}
 
 /* ── PETA SEKOLAH ── */
 .peta-frame{background:var(--white);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 10px 30px rgba(11,31,58,.05)}
@@ -89,7 +113,8 @@
 @media(max-width:900px){
   .profile-summary{grid-template-columns:1fr}
   .karyawan-grid{grid-template-columns:1fr 1fr}
-  .tupoksi-grid{grid-template-columns:1fr}
+  .tupoksi-card-light{flex-direction:column}
+  .tupoksi-card-light .tupoksi-image{flex:none;width:100%}
   .kegiatan-grid{grid-template-columns:1fr 1fr}
 }
 @media(max-width:600px){

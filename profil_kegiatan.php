@@ -42,8 +42,8 @@ if ($kat_kegiatan) {
         <?php while ($row = mysqli_fetch_assoc($r_kegiatan)): ?>
         <div class="kegiatan-card reveal">
           <div class="kegiatan-thumb">
-            <?php if (!empty($row['gambar']) && file_exists('uploads/berita/' . $row['gambar'])): ?>
-              <img src="uploads/berita/<?= htmlspecialchars($row['gambar']) ?>" alt="<?= htmlspecialchars($row['judul']) ?>">
+            <?php if (!empty($row['gambar']) && file_exists('img/berita/' . $row['gambar'])): ?>
+              <img src="img/berita/<?= htmlspecialchars($row['gambar']) ?>" alt="<?= htmlspecialchars($row['judul']) ?>">
             <?php else: ?>
               <div class="kegiatan-thumb-fallback"><i class="bi bi-calendar-event"></i></div>
             <?php endif; ?>

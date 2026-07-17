@@ -1,11 +1,3 @@
-<?php
-
-include 'koneksi.php';
-
-$q_bidang = "SELECT * FROM bidang ORDER BY id ASC";
-$r_bidang = mysqli_query($conn, $q_bidang);
-?>
-
 <section class="section" style="padding-bottom:10px">
   <div class="section-inner">
     <a href="?page=home" class="btn-back">&larr; Kembali ke Beranda</a>
@@ -17,17 +9,35 @@ $r_bidang = mysqli_query($conn, $q_bidang);
 <section class="section section-alt" style="padding-top:20px">
   <div class="section-inner">
     <div class="tupoksi-grid">
-      <?php if ($r_bidang && mysqli_num_rows($r_bidang) > 0): ?>
-        <?php while ($row = mysqli_fetch_assoc($r_bidang)): ?>
-        <div class="profile-card-block reveal">
-          <h3><?= htmlspecialchars($row['nama']) ?></h3>
-          <p><strong>Tugas:</strong> <?= !empty($row['tugas']) ? nl2br(htmlspecialchars($row['tugas'])) : '-' ?></p>
-          <p><strong>Fungsi:</strong> <?= !empty($row['fungsi']) ? nl2br(htmlspecialchars($row['fungsi'])) : '-' ?></p>
+      <!-- Card 1: Tugas, Fungsi dan Struktur Dinas Pendidikan -->
+      <div class="tupoksi-card tupoksi-card-dark">
+        <h3 class="tupoksi-title">Tugas, Fungsi dan Struktur Dinas Pendidikan</h3>
+        <p class="tupoksi-desc">
+          Berdasarkan Peraturan Bupati Kabupaten Bangkalan No. 37 Tahun 2016 tentang Kedudukan, Susunan Organisasi, Tugas Dan Fungsi, Serta Tata Kerja Dinas Pendidikan, Dinas Pendidikan Kabupaten Bangkalan mempunyai tugas dan kewajiban membantu bupati melaksanakan urusan pemerintahan yang menjadi kewenangan daerah bidang pendidikan. Dalam menyelenggarakan tugas dan kewajiban tersebut Dinas Pendidikan Kabupaten Bangkalan mempunyai fungsi:
+        </p>
+        <ul class="tupoksi-list">
+          <li><i class="bi bi-check-circle"></i> Perumusan kebijakan daerah bidang pendidikan;</li>
+          <li><i class="bi bi-check-circle"></i> Pelaksanaan evaluasi dan pelaporan daerah bidang pendidikan;</li>
+          <li><i class="bi bi-check-circle"></i> Pelaksanaan fungsi lain yang diberikan oleh Bupati terkait dengan tugas dan fungsinya</li>
+        </ul>
+      </div>
+
+      <!-- Card 2: Permasalahan Strategis yang Diidentifikasi -->
+      <div class="tupoksi-card tupoksi-card-light">
+        <div class="tupoksi-image">
+          <img src="image/bg2.png" alt="Gedung Dinas Pendidikan Kabupaten Bangkalan">
         </div>
-        <?php endwhile; ?>
-      <?php else: ?>
-        <div class="karyawan-empty">Belum ada data bidang.</div>
-      <?php endif; ?>
+        <div class="tupoksi-content">
+          <h3 class="tupoksi-title">Permasalahan Strategis yang Diidentifikasi</h3>
+          <ul class="tupoksi-list">
+            <li><i class="bi bi-check-circle"></i> Masih rendahnya capaian Indeks Pendidikan Kabupaten Bangkalan dibandingkan daerah lain.</li>
+            <li><i class="bi bi-check-circle"></i> Belum meratanya kualitas layanan dan kuantitas fasilitas pendidikan, termasuk infrastruktur dasar seperti internet dan sanitasi.</li>
+            <li><i class="bi bi-check-circle"></i> Kekurangan jumlah tenaga pendidik yang kompeten dan memenuhi kualifikasi S1/D4, terutama di daerah pedesaan.</li>
+            <li><i class="bi bi-check-circle"></i> Masih terdapatnya lembaga pendidikan (PAUD, SD, SMP) yang belum terakreditasi atau terakreditasi C.</li>
+            <li><i class="bi bi-check-circle"></i> Tingginya angka putus sekolah yang dipengaruhi oleh faktor ekonomi keluarga.</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
