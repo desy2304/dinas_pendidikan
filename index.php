@@ -100,9 +100,9 @@ if (!file_exists($file)) {
     <h3>Dinas Pendidikan Kabupaten Sumenep</h3>
     <p>Jl. DR. Cipto No.35, Desa Kolor, Kecamatan Kota Sumenep, Jawa Timur 69417, Indonesia.</p>
     <div class="social-link">
-      <a href="#" target="_blank" class="social-icon"><i class="bi bi-tiktok"></i></a>
-      <a href="#" target="_blank" class="social-icon"><i class="bi bi-facebook"></i></a>
-      <a href="#" target="_blank" class="social-icon"><i class="bi bi-instagram"></i></a>
+      <a href="https://www.tiktok.com/@dinas.pendidikan_sumenep?_r=1&_t=ZS-98B9pKy6OtI" target="_blank" class="social-icon"><i class="bi bi-tiktok"></i></a>
+      <a href="https://www.facebook.com/DisdikSumenep" target="_blank" class="social-icon"><i class="bi bi-facebook"></i></a>
+      <a href="https://www.instagram.com/dinaspendidikansumenep?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="social-icon"><i class="bi bi-instagram"></i></a>
       <a href="#" target="_blank" class="social-icon"><i class="bi bi-whatsapp"></i></a>
     </div>
     <div class="footer-divider"></div>
