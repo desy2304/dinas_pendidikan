@@ -1,6 +1,7 @@
 <?php
 
-include 'koneksi.php' ;
+include 'koneksi.php';
+
 // Ambil data profil (visi, misi)
 $query_profil = "SELECT visi, misi FROM profil LIMIT 1";
 $result_profil = mysqli_query($conn, $query_profil);
@@ -45,14 +46,12 @@ $result_pegawai = mysqli_query($conn, $query_pegawai);
 <!-- ===== TICKER ===== -->
 <div class="ticker">
   <div class="ticker-inner">
+    <span>Dinas Pendidikan Sumenep</span>
     <span>Bismillah Melayani</span>
-    <span>Disdik Sumenep</span>
+    <span>Dinas Pendidikan Sumenep</span>
     <span>Bismillah Melayani</span>
-    <span>Disdik Sumenep</span>
+    <span>Dinas Pendidikan Sumenep</span>
     <span>Bismillah Melayani</span>
-    <span>Disdik Sumenepi</span>
-    <span>Bismillah Melayani</span>
-    <span>Disdik Sumenep</span>
   </div>
 </div>
  
@@ -178,7 +177,6 @@ $result_pegawai = mysqli_query($conn, $query_pegawai);
         <div class="section-label">Pelayanan Publik</div>
         <div class="section-title">Layanan Kami</div>
       </div>
-      <a href="?page=layanan_publik" class="link-all">Lihat semua</a>
     </div>
     <div class="layanan-grid">
       <a href="?page=detail_layanan&slug=legalisir-ijazah" class="layanan-card reveal" style="text-decoration:none;color:inherit;display:block">
@@ -279,7 +277,7 @@ $result_pegawai = mysqli_query($conn, $query_pegawai);
         <div class="section-label">Sumber Daya Manusia</div>
         <div class="section-title">Pimpinan &amp; Staff</div>
       </div>
-      <a href="?page=profil_karyawan" class="link-all">Lihat semua pegawai</a>
+      <a href="?page=pegawai" class="link-all">Lihat semua pegawai</a>
     </div>
     <div class="pegawai-grid">
       <?php if (mysqli_num_rows($result_pegawai) > 0): ?>
@@ -325,7 +323,7 @@ $result_pegawai = mysqli_query($conn, $query_pegawai);
           <div style="font-size:12px;font-weight:700;color:var(--gold-light);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px">Cek Status Pengaduan</div>
           <form action="index.php" method="GET" class="tiket-input">
             <input type="hidden" name="page" value="pengaduan">
-            <input type="text" name="no_tiket" placeholder="Masukkan nomor tiket (contoh: PGD-20260630-AB12)" required/>
+            <input type="text" name="no_tiket" placeholder="Masukkan nomor tiket (contoh: TK-001)" required/>
             <button type="submit">Cek →</button>
           </form>
         </div>

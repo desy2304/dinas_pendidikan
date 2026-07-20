@@ -37,24 +37,17 @@ if (!empty($_FILES['lampiran']['name']) && $_FILES['lampiran']['error'] === UPLO
     }
 }
 
-// Generate nomor tiket unik: PGD-YYYYMMDD-XXXX
-function generate_no_tiket($conn) {
-    $karakter = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // hindari karakter ambigu (0/O, 1/I)
-    do {
-        $acak = '';
-        for ($i = 0; $i < 4; $i++) {
-            $acak .= $karakter[random_int(0, strlen($karakter) - 1)];
-        }
-        $no_tiket = 'PGD-' . date('Ymd') . '-' . $acak;
+// Generate nomor tiket berurutan: TK-001, TK-002, dst
+function generate_no_tiket(mysqli $conn) {
+    $result = $conn->query("SELECT no_tiket FROM pengaduan WHERE no_tiket LIKE 'TK-%' ORDER BY id DESC LIMIT 1");
+    $last = $result ? $result->fetch_assoc() : null;
 
-        $stmt = $conn->prepare("SELECT id FROM pengaduan WHERE no_tiket = ?");
-        $stmt->bind_param('s', $no_tiket);
-        $stmt->execute();
-        $ada = $stmt->get_result()->num_rows > 0;
-        $stmt->close();
-    } while ($ada);
+    $next_number = 1;
+    if ($last && preg_match('/^TK-(\d+)$/', $last['no_tiket'], $m)) {
+        $next_number = (int) $m[1] + 1;
+    }
 
-    return $no_tiket;
+    return 'TK-' . str_pad($next_number, 3, '0', STR_PAD_LEFT);
 }
 
 $no_tiket = generate_no_tiket($conn);

@@ -58,7 +58,7 @@ $status_label = [
 
     <form action="index.php" method="GET" class="tiket-search reveal">
       <input type="hidden" name="page" value="pengaduan">
-      <input type="text" name="no_tiket" placeholder="Masukkan nomor tiket (contoh: PGD-20260630-AB12)" value="<?= htmlspecialchars($no_tiket) ?>" required>
+      <input type="text" name="no_tiket" placeholder="Masukkan nomor tiket (contoh: TK-001)" value="<?= htmlspecialchars($no_tiket) ?>" required>
       <button type="submit">Cek →</button>
     </form>
 
